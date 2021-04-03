@@ -1,9 +1,9 @@
 import React from "react";
 import CardItem from "./CardItem";
 import "./Cards.css";
-import image1 from "../images/img-1.jpg";
-import image2 from "../images/img-2.jpg";
-import image3 from "../images/img-home.jpg";
+import image1 from "../assets/images/img-1.jpg";
+import image2 from "../assets/images/img-2.jpg";
+import image3 from "../assets/images/img-home.jpg";
 function Cards() {
   const data = [
     {
