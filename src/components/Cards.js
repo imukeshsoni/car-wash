@@ -5,28 +5,47 @@ import image1 from "../images/img-1.jpg";
 import image2 from "../images/img-2.jpg";
 import image3 from "../images/img-home.jpg";
 function Cards() {
+  const data = [
+    {
+      imagePath: image1,
+      title: "Explore superfast wash services at your doorstep!",
+      heading: "Superfast",
+      path: "/services",
+    },
+    {
+      imagePath: image2,
+      title: "Explore superfast wash services at your doorstep!",
+      heading: "Superfast",
+      path: "/services",
+    },
+    {
+      imagePath: image3,
+      title: "Explore superfast wash services at your doorstep!",
+      heading: "Superfast",
+      path: "/services",
+    },
+  ];
+  const onclick = (selectedIndex) => {
+    const path = data[selectedIndex].path;
+  };
+
   return (
     <div className="cards">
       <h1>Check out these EPIC Destinations!</h1>
       <div className="cards__container">
-        <CardItem
-          src={image1}
-          text="Explore superfast wash services at your doorstep!"
-          label="Superfast"
-          path="/services"
-        />
-        <CardItem
-          src={image2}
-          text="Get a deep clean wash for your car"
-          label="Deep Clean"
-          path="/services"
-        />
-        <CardItem
-          src={image3}
-          text={"Get the dust out of interior and feather covers of seats"}
-          label={"Vaccume clean"}
-          path={"/services"}
-        />
+        {data.map((value, i) => {
+          return (
+            <CardItem
+              key={i}
+              src={value.imagePath}
+              text={value.title}
+              label={value.heading}
+              onclick={() => {
+                onclick(i);
+              }}
+            />
+          );
+        })}
       </div>
     </div>
   );
