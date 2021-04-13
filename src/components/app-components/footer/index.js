@@ -1,4 +1,7 @@
 import React from "react";
+import "./styles.css";
+import { Button } from "../../base-components/button/index.js";
+import Input from "../../base-components/input";
 
 function Footer() {
   const data = [
@@ -22,15 +25,25 @@ function Footer() {
 
   return (
     <div className="footer--conatiner">
-      <h3 className="footer-heading">WASHIVO</h3>
-      <div className="contact-us">
+      <h3 className="footer--heading">WASHIVO</h3>
+      <div className="footer--items">
         {data.map((value, i) => {
           return (
             <li>
-              <a href={value.link}>{value.title}</a>
+              <a key={i} className="href" href={value.link}>
+                {value.title}
+              </a>
             </li>
           );
         })}
+      </div>
+      <div className=" footer--heading">
+        <h2>Subscribe to our newsletters and offers</h2>
+
+        <Input type="email" minLength="6" maxLength="32" />
+        <Button buttonStyle="btn--outline" buttonSize="btn--medium">
+          Subscribe
+        </Button>
       </div>
     </div>
   );

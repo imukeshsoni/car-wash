@@ -1,6 +1,8 @@
 .cards {
   padding: 4rem;
-  background: #fff;
+  font-size: 30px;
+  font-family: 'Courier New', Courier, monospace;
+
 }
 
 h1 {
@@ -9,11 +11,14 @@ h1 {
 
 .cards__container {
   display: flex;
+  padding: 20px;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   flex: 1;
 }
+
+
 
 .cards__wrapper {
   position: relative;

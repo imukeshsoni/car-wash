@@ -4,7 +4,9 @@ import "./styles.css";
 import image1 from "../../../assets/images/img-1.jpg";
 import image2 from "../../../assets/images/img-2.jpg";
 import image3 from "../../../assets/images/img-home.jpg";
+import { useHistory } from "react-router-dom";
 function Cards() {
+  let history = useHistory();
   const data = [
     {
       imagePath: image1,
@@ -25,13 +27,13 @@ function Cards() {
       path: "/services",
     },
   ];
-  const onclick = (selectedIndex) => {
-    const path = data[selectedIndex].path;
-  };
+  // const onclick = (selectedIndex) => {
+  //   history.push(data[selectedIndex].path);
+  // };
 
   return (
     <div className="cards">
-      <h1>Check out these EPIC Destinations!</h1>
+      <h1 className="cards__heading">Check out these services for your car!</h1>
       <div className="cards__container">
         {data.map((value, i) => {
           return (
@@ -40,9 +42,7 @@ function Cards() {
               src={value.imagePath}
               text={value.title}
               label={value.heading}
-              onclick={() => {
-                onclick(i);
-              }}
+              path={value.path}
             />
           );
         })}
