@@ -27,9 +27,6 @@ function Cards() {
       path: "/services",
     },
   ];
-  // const onclick = (selectedIndex) => {
-  //   history.push(data[selectedIndex].path);
-  // };
 
   return (
     <div className="cards">

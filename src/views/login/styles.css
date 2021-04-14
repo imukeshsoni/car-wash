@@ -19,6 +19,7 @@
 }
 .login--page{
 	padding: 30px;
+	height: 680px;
 	align-items: center;
 	justify-content: center;
 	background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
@@ -27,23 +28,16 @@
 
  @media screen and (max-width:720px) {
 	.login--container{
-		align-items: center;
 		height: 400px;
 		width: 350px;
-		display: flex;
-		flex-direction: column;
 	}
 
  }
- @media screen and (max-width:960px) {
-
+ @media screen and (max-width:800px) {
 
 	.login--container{
-		align-items: center;
 		height: 500px;
 		width: 400px;
-		display: flex;
-		flex-direction: column;
 	}
 
  }
