@@ -5,7 +5,7 @@ function Services() {
   return (
     <div>
       <ServicePlan />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

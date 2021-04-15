@@ -5,11 +5,20 @@ function Input(props) {
   return (
     <input
       className="input--text"
-      type={props.type}
-      autoComplete={props.autoComplete}
-      minLength={props.minLength}
-      maxLength={props.maxLength}
-      placeholder={props.placeHolder}
+      type={props.Type}
+      name={props.Name}
+      autoComplete={props.AutoComplete}
+      minLength={props.MinLength}
+      maxLength={props.MaxLength}
+      placeholder={props.PlaceHolder}
+      onChange={props.OnChange}
+      onSubmit={props.OnSubmit}
+      pattern={props.Pattern}
+      value={props.Value}
+      required={props.Required}
+      onInput={props.OnInput}
+      onInvalid={props.OnInvalid}
+      title={props.Title}
     />
   );
 }

@@ -4,9 +4,8 @@ import "./styles.css";
 import image1 from "../../../assets/images/img-1.jpg";
 import image2 from "../../../assets/images/img-2.jpg";
 import image3 from "../../../assets/images/img-home.jpg";
-import { useHistory } from "react-router-dom";
 function Cards() {
-  let history = useHistory();
+  //TODO: get data from backend
   const data = [
     {
       imagePath: image1,
@@ -16,6 +15,12 @@ function Cards() {
     },
     {
       imagePath: image2,
+      title: "Explore superfast wash services at your doorstep!",
+      heading: "Superfast",
+      path: "/services",
+    },
+    {
+      imagePath: image3,
       title: "Explore superfast wash services at your doorstep!",
       heading: "Superfast",
       path: "/services",

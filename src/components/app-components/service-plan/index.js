@@ -12,7 +12,7 @@ function ServicePlan(props) {
       </h2>
 
       <div className="service--contents">
-        <img className="service--image" src={image} />
+        <img className="service--image" src={image} alt="not loaded" />
         <div className="service--description">
           <p className="">
             {/* {props.details} */}

@@ -1,46 +1,77 @@
-import React from "react";
-import { Button } from "../../components/base-components/button/index.js";
-
+import React, { Component } from "react";
 import "./styles.css";
 import Input from "../../components/base-components/input/index.js";
 
-function Login() {
-  function clickHandler() {
-    console.log("Button clicked");
+export default class Login extends Component {
+  constructor() {
+    super();
+    this.state = {
+      input: {},
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  return (
-    <div className="login--page">
-      <div className="login--container">
-        <div className="input--container">
-          <Input
-            type="email"
-            id="email"
-            name="email"
-            placeHolder="Email/Username"
-          />
-          <br />
 
-          <Input
-            type="password"
-            id="password"
-            name="password"
-            placeHolder="Password"
-          />
+  //updating user credentials
+  handleChange(event) {
+    let input = this.state.input;
 
-          <div className="btn--padding">
-            <Button
-              linkTo="/"
-              buttonStyle="btn--outline"
-              buttonSize="btn--large"
-              onClick={clickHandler}
-            >
-              Log In
-            </Button>
-          </div>
+    input[event.target.name] = event.target.value;
+
+    this.setState({
+      input,
+    });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+
+    // input["email"] = event.target.email;
+    // input["password"] = event.target.password;
+    console.log(this.state);
+    // let input = {};
+    // this.setState({ input: input });
+    // alert("Demo Form is submited");
+  }
+
+  render() {
+    return (
+      <div className="login--page">
+        <div className="login--container">
+          <form onSubmit={this.handleSubmit}>
+            <div className="input--container">
+              <Input
+                Type="tel"
+                Name="phone"
+                PlaceHolder="Phone"
+                OnChange={this.handleChange}
+                AutoComplete="username"
+                Pattern="[0-9]{10}"
+                Required="required"
+                Title="Please enter a 10 digit phone number"
+              />
+              <br />
+
+              <Input
+                Type="password"
+                Name="password"
+                PlaceHolder="Password"
+                OnChange={this.handleChange}
+                AutoComplete="current-password"
+                MinLength="6"
+                MaxLength="16"
+                Required="required"
+                Title="Please enter a password"
+              />
+
+              <div className="btn--padding">
+                <Input Type="submit" Value="submit" />
+              </div>
+            </div>
+          </form>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
-
-export default Login;
