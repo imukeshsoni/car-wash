@@ -1,0 +1,7 @@
+.orders--container{
+	display: grid;
+	flex-direction: column;
+	flex: 1;
+	background-color: green;
+	align-items: center;
+}
