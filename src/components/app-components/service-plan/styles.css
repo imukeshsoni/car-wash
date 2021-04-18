@@ -1,0 +1,45 @@
+:root{
+	--primary: #242424;
+	--secondary: #fff;
+}
+
+.service--container{
+	padding: 10px;
+	align-items: right;
+	display: flex;
+	flex-direction: column;
+	width: 60rem;
+}
+.service--plan--heading{
+	color:var(--primary);
+	text-transform: uppercase;
+}
+.service--contents{
+	background-color: var(--primary);
+
+	justify-content: space-between;
+	display: flex;
+	width: inherit;
+	flex-direction: row;
+	border-radius: 20px;
+	box-shadow: -5px 0 15px 1px var(--primary);
+}
+.service--image{
+
+	border-radius: 20px;
+	width: 200px;
+	height:inherit
+
+}
+.service--description{
+	color: var(--secondary);
+	margin:10px;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+.service--amount{
+	font: small-caps bold 30px sans-serif;
+	color:var(--secondary);
+}
