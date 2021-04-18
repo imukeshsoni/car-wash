@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import Orders from "../../components/app-components/orders/index.js";
+import { Link } from "react-router-dom";
+import "./styles.css";
 
-export class Order extends Component {
-  render() {
-    return <div></div>;
-  }
+function Order() {
+  return <div></div>;
 }
 
 export default Order;

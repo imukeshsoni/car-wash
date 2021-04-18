@@ -2,10 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../../components/base-components/button/index.js";
 import "./styles.css";
+import { useAuth0 } from "@auth0/auth0-react";
+export function setButton(props) {
+  console.log("Got input");
+}
 
 function Navbar() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
+  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
 
   const clickHandler = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -51,26 +56,54 @@ function Navbar() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/login" className="nav-links" onClick={closeMobileMenu}>
-                Log in
-              </Link>
+              {isAuthenticated ? (
+                <Link
+                  to="/login"
+                  className="nav-links"
+                  onClick={() => logout()}
+                >
+                  Logout
+                </Link>
+              ) : (
+                <Link
+                  to="/login"
+                  className="nav-links"
+                  onClick={() => {
+                    console.log("logged in");
+                  }}
+                >
+                  Log In
+                </Link>
+              )}
             </li>
             <li className="nav-item">
-              <Link
-                to="/sign-up"
-                className="nav-links-mobile"
-                onClick={closeMobileMenu}
-              >
-                Sign Up
-              </Link>
+              {isAuthenticated && (
+                <Link
+                  to="/profile"
+                  className="nav-links-mobile"
+                  onClick={() => closeMobileMenu}
+                >
+                  PROFILE
+                </Link>
+              )}
             </li>
           </ul>
-          {/* When button variable is true, button size is changed */}
-          {button && <Button buttonStyle="btn--outline">SIGN UP</Button>}
+          {/* When button variable is true, button is displayed */}
+          {button && isAuthenticated && (
+            <Button
+              linkTo="/profile"
+              buttonStyle="btn--outline"
+              onClick={() => {
+                console.log(user);
+                setButton();
+              }}
+            >
+              PROFILE
+            </Button>
+          )}
         </div>
       </nav>
     </>
   );
 }
-
 export default Navbar;

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./styles.css";
 import Input from "../../components/base-components/input/index.js";
-
+import { setButton } from "../../routes/navbar/index.js";
+import { CustomerLogin } from "../../apis/apis.js";
 export default class Login extends Component {
   constructor() {
     super();
@@ -26,10 +27,14 @@ export default class Login extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    setButton(true);
+    const { customer, customerLoggedIn } = CustomerLogin(
+      this.state.input["customerId"]
+    );
 
     // input["email"] = event.target.email;
     // input["password"] = event.target.password;
-    console.log(this.state);
+    console.log("Customer details : " + customer + customerLoggedIn);
     // let input = {};
     // this.setState({ input: input });
     // alert("Demo Form is submited");
@@ -43,7 +48,7 @@ export default class Login extends Component {
             <div className="input--container">
               <Input
                 Type="tel"
-                Name="phone"
+                Name="customerId"
                 PlaceHolder="Phone"
                 OnChange={this.handleChange}
                 AutoComplete="username"
