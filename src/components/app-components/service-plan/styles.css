@@ -3,37 +3,33 @@
 	--secondary: #fff;
 }
 
-.service--container{
-	padding: 10px;
-	align-items: right;
-	display: flex;
-	flex-direction: column;
-	width: 60rem;
-}
 .service--plan--heading{
-	color:var(--primary);
+	color:var(--secondary);
 	text-transform: uppercase;
+	margin: 10px 10px 0 10px;
+	padding-bottom: 0;
 }
 .service--contents{
 	background-color: var(--primary);
-
+	margin: 20px;
 	justify-content: space-between;
 	display: flex;
-	width: inherit;
-	flex-direction: row;
+	width: 300px;
+	flex-direction: column;
 	border-radius: 20px;
 	box-shadow: -5px 0 15px 1px var(--primary);
 }
 .service--image{
 
-	border-radius: 20px;
-	width: 200px;
-	height:inherit
+	border-radius: inherit;
+	width: inherit;
+	height:inherit;
 
 }
 .service--description{
 	color: var(--secondary);
 	margin:10px;
+	padding: 5px;
 	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 	display: flex;
 	flex-direction: column;
@@ -42,4 +38,5 @@
 .service--amount{
 	font: small-caps bold 30px sans-serif;
 	color:var(--secondary);
+	padding: 5px;
 }
