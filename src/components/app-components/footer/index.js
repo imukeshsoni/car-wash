@@ -30,7 +30,6 @@ export class Footer extends Component {
     axios
       .post("http://localhost:8081/subscribe", this.state.email)
       .then((res) => {
-        console.log(res.data.password);
         if (res.status === 200) {
           alert(
             "You've successfully subscribed to our newsletters and offers!"
@@ -39,6 +38,7 @@ export class Footer extends Component {
       })
       .catch((err) => {
         console.log(err);
+
         if (err.status !== 200) {
           alert("Something went wrong!");
         }

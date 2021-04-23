@@ -3,9 +3,6 @@ import { Link } from "react-router-dom";
 import { Button } from "../../components/base-components/button/index.js";
 import "./styles.css";
 import { useAuth0 } from "@auth0/auth0-react";
-export function setButton(props) {
-  console.log("Got input");
-}
 
 function Navbar() {
   const [click, setClick] = useState(false);
@@ -57,11 +54,7 @@ function Navbar() {
             </li>
             <li className="nav-item">
               {isAuthenticated ? (
-                <Link
-                  to="/login"
-                  className="nav-links"
-                  onClick={() => logout()}
-                >
+                <Link to="/login" className="nav-links" onClick={logout}>
                   Logout
                 </Link>
               ) : (

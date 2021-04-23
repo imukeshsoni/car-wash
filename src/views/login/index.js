@@ -1,80 +1,39 @@
 import React, { Component } from "react";
 import "./styles.css";
 import Input from "../../components/base-components/input/index.js";
-import { setButton } from "../../routes/navbar/index.js";
-import { CustomerLogin } from "../../apis/apis.js";
+import { Button } from "../../components/base-components/button/index.js";
+import axios from "axios";
 export default class Login extends Component {
   constructor() {
     super();
-    this.state = {
-      input: {},
+    this.state = {};
+
+    this.handleAdmin = this.handleAdmin.bind(this);
+  }
+
+  handleAdmin() {
+    const data = {
+      username: "foo",
+      password: "foo",
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  //updating user credentials
-  handleChange(event) {
-    let input = this.state.input;
-
-    input[event.target.name] = event.target.value;
-
-    this.setState({
-      input,
-    });
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    setButton(true);
-    const { customer, customerLoggedIn } = CustomerLogin(
-      this.state.input["customerId"]
-    );
-
-    // input["email"] = event.target.email;
-    // input["password"] = event.target.password;
-    console.log("Customer details : " + customer + customerLoggedIn);
-    // let input = {};
-    // this.setState({ input: input });
-    // alert("Demo Form is submited");
+    axios
+      .post("http://localhost:8081/", data)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   render() {
     return (
       <div className="login--page">
         <div className="login--container">
-          <form onSubmit={this.handleSubmit}>
-            <div className="input--container">
-              <Input
-                Type="tel"
-                Name="customerId"
-                PlaceHolder="Phone"
-                OnChange={this.handleChange}
-                AutoComplete="username"
-                Pattern="[0-9]{10}"
-                Required="required"
-                Title="Please enter a 10 digit phone number"
-              />
-              <br />
-
-              <Input
-                Type="password"
-                Name="password"
-                PlaceHolder="Password"
-                OnChange={this.handleChange}
-                AutoComplete="current-password"
-                MinLength="6"
-                MaxLength="16"
-                Required="required"
-                Title="Please enter a password"
-              />
-
-              <div className="btn--padding">
-                <Input Type="submit" Value="submit" />
-              </div>
-            </div>
-          </form>
+          <Button buttonStyle="btn--outline" onClick={this.handleAdmin}>
+            Admin?
+          </Button>
+          {/* <a href="http://localhost:8081/login">Login</a> */}
         </div>
       </div>
     );
