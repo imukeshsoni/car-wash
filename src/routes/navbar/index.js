@@ -2,12 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../../components/base-components/button/index.js";
 import "./styles.css";
-import { useAuth0 } from "@auth0/auth0-react";
+import { selectUser, logout } from "../../redux/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-function Navbar() {
+const Navbar = () => {
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const logOut = () => {
+    dispatch(logout());
+  };
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
-  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
 
   const clickHandler = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -52,37 +57,45 @@ function Navbar() {
                 Services
               </Link>
             </li>
+
             <li className="nav-item">
-              {isAuthenticated ? (
-                <Link to="/login" className="nav-links" onClick={logout}>
-                  Logout
+              {user ? (
+                <Link
+                  to="/"
+                  className="nav-links"
+                  onClick={(e) => {
+                    logOut(e);
+                  }}
+                >
+                  Log Out
                 </Link>
               ) : (
                 <Link
                   to="/login"
                   className="nav-links"
                   onClick={() => {
-                    console.log("logged in");
+                    console.log("login redirected");
                   }}
                 >
                   Log In
                 </Link>
               )}
             </li>
+
             <li className="nav-item">
-              {isAuthenticated && (
+              {user && (
                 <Link
                   to="/profile"
                   className="nav-links-mobile"
                   onClick={() => closeMobileMenu}
                 >
-                  PROFILE
+                  {user.name}
                 </Link>
               )}
             </li>
           </ul>
           {/* When button variable is true, button is displayed */}
-          {button && isAuthenticated && (
+          {button && user && (
             <Button
               linkTo="/profile"
               buttonStyle="btn--outline"
@@ -91,12 +104,12 @@ function Navbar() {
                 setButton();
               }}
             >
-              PROFILE
+              {user.name}
             </Button>
           )}
         </div>
       </nav>
     </>
   );
-}
+};
 export default Navbar;
