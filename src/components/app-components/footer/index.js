@@ -45,33 +45,12 @@ export class Footer extends Component {
       });
   };
 
-  data = [
-    {
-      link: "/",
-      title: "contact us",
-    },
-    {
-      link: "/",
-      title: "FAQs",
-    },
-  ];
-
   render() {
     return (
       <div className="footer--conatiner">
         <h3 className="footer--heading">WASHIVO</h3>
-        <div className="footer--items">
-          {this.data.map((value, i) => {
-            return (
-              <li key={i}>
-                <a className="href" href={value.link}>
-                  {value.title}
-                </a>
-              </li>
-            );
-          })}
-        </div>
-        <form onSubmit={this.subscribeHandler} className=" footer--heading">
+
+        <form onSubmit={this.subscribeHandler} className="footer--heading">
           <h2>Subscribe to our newsletters and offers</h2>
 
           <Input
@@ -86,6 +65,7 @@ export class Footer extends Component {
       </div>
     );
   }
+  1;
 }
 
 export default Footer;

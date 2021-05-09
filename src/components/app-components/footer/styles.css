@@ -5,6 +5,8 @@
 	justify-content: space-between;
 	padding: 10px;
 
+
+
 }
 .footer--heading{
 	align-items: flex-start;
@@ -31,13 +33,12 @@
 h2{
 	font-size: 30px;
 	color: #fff;
-	padding-bottom :20px;
+	padding :10px;
 
 }
 @media screen and (max-width:960px) {
 
 	.footer--items{
-
 	flex-direction: column;
 	align-items : flex-start;
 }

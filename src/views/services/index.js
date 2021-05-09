@@ -25,24 +25,70 @@ const data = [
   },
 ];
 export function clickHandler(i) {
-  console.log(i);
+  console.log(data[i]);
   return data[i];
 }
 function Services() {
   return (
     <div>
       <div className="service--container">
-        {data.map((value, i) => {
-          return (
-            <ServicePlan
-              key={i}
-              name={value.name}
-              details={value.details}
-              amount={value.amount}
-              onClick={clickHandler(i)}
+        <div className="service--items--container">
+          <div className="custom--margin address--line">
+            <label for="address">Address</label>
+            <br />
+            <input
+              type="text"
+              placeholder="Enter your address"
+              name="address"
             />
-          );
-        })}
+          </div>
+          <div className="custom--margin timing--line">
+            <label for="date">Wash Date</label>
+            <br />
+            <input type="date" name="date" />
+            <br />
+
+            <label for="time">Wash Time</label>
+            <br />
+            <input type="time" name="time" />
+            <br />
+          </div>
+          <div className="custom--margin car--section">
+            <label for="car">Select Your car</label>
+            <br />
+            <select name="car">
+              <option value="volvo">Volvo</option>
+              <option value="saab">Saab</option>
+              <option value="mercedes">Mercedes</option>
+              <option value="audi">Audi</option>
+            </select>
+          </div>
+
+          <div className="custom--margin service--plans">
+            <label for="paymentMode">Select Service Plan</label>
+            <br />
+            <select name="services">
+              <option value="superfast">Superfast</option>
+              <option value="deepclean">Deep clean</option>
+            </select>
+          </div>
+
+          <div className="custom--margin payment--section">
+            <label for="paymentMode">Payment Mode</label>
+            <br />
+            <select name="paymentMode">
+              <option value="online">Online</option>
+              <option value="cash">Cash</option>
+            </select>
+
+            <br />
+            <label>Amount: 0</label>
+
+            <button type="submit" name="submit">
+              Book Wash
+            </button>
+          </div>
+        </div>
       </div>
 
       <Footer />

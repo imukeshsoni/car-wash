@@ -6,11 +6,13 @@ import axios from "axios";
 
 import { login, logout } from "../../redux/userSlice";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 
 const Login = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   const dispatch = useDispatch();
 
@@ -28,6 +30,8 @@ const Login = () => {
 
     setEmail("");
     setPassword("");
+
+    history.push("/");
   };
 
   return (
