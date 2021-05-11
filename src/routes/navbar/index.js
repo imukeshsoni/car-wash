@@ -64,6 +64,7 @@ const Navbar = () => {
                   to="/"
                   className="nav-links"
                   onClick={(e) => {
+                    closeMobileMenu();
                     logOut(e);
                   }}
                 >
@@ -73,9 +74,7 @@ const Navbar = () => {
                 <Link
                   to="/login"
                   className="nav-links"
-                  onClick={() => {
-                    console.log("login redirected");
-                  }}
+                  onClick={closeMobileMenu}
                 >
                   Log In
                 </Link>
@@ -87,7 +86,7 @@ const Navbar = () => {
                 <Link
                   to="/profile"
                   className="nav-links-mobile"
-                  onClick={() => closeMobileMenu}
+                  onClick={closeMobileMenu}
                 >
                   {user.name}
                 </Link>
@@ -101,7 +100,7 @@ const Navbar = () => {
               buttonStyle="btn--outline"
               onClick={() => {
                 console.log(user);
-                setButton();
+                closeMobileMenu();
               }}
             >
               {user.name}

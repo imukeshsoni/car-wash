@@ -1,0 +1,9 @@
+.side--nav{
+	width: 200px;
+	position: sticky;
+
+}
+.container{
+	display: flex;
+	flex-direction: row;
+}

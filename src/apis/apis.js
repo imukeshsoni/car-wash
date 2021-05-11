@@ -4,19 +4,20 @@ import axios from "axios";
 // const adminLoggedIn = false;
 // const washerLoggedIn = false;
 export function CustomerLogin(props) {
-  const [customerLoggedIn, setcustomerLoggedIn] = useState(false);
   const [customer, setcustomer] = useState({});
 
-  const url = "https://localhost:8081/customer";
+  const url = "http://localhost:8081/user/get/msony@gmail.com";
   axios
-    .get(url + props.customerId)
+    .get(url)
     .then((res) => {
-      setcustomerLoggedIn(true);
+      debugger;
+      console.log(res);
+      debugger;
       setcustomer(res);
     })
     .catch((err) => {
       alert(err);
     });
 
-  return { customer, customerLoggedIn };
+  return { customer };
 }
