@@ -32,9 +32,6 @@ const Navbar = () => {
     showButton();
   }, []);
 
-  if (!user) {
-    return "Please Log in!";
-  }
   return (
     <>
       <nav className="navbar">

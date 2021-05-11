@@ -29,6 +29,9 @@ export function clickHandler(i) {
   return data[i];
 }
 function Services() {
+  if (!user) {
+    return "Please Log in!";
+  }
   return (
     <div>
       <div className="service--container">
