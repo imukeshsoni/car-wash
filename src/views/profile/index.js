@@ -3,6 +3,7 @@ import "./styles.css";
 import { selectUser, logout } from "../../redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Order from "../../components/app-components/orders/index.js";
+import UserProfile from "../../components/app-components/user-profile/index.js";
 
 function Profile() {
   const dispatch = useDispatch();
@@ -47,6 +48,8 @@ function Profile() {
         </ul>
       </div>
       <div className="selected--menu">
+        {selectedButtonIndex == 0 && <UserProfile />}
+
         {selectedButtonIndex == 1 && <Order />}
       </div>
     </div>
