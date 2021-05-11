@@ -48,7 +48,7 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
-            {user.role === "ROLE_USER" && (
+            {user && user.role === "ROLE_USER" && (
               <li className="nav-item">
                 <Link
                   to="/services"

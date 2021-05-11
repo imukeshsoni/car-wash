@@ -19,19 +19,28 @@ function Profile() {
       <div className="side--nav">
         <ul>
           <li>
-            <button onClick={() => setselectedButtonIndex(0)}>
+            <button
+              className="menu--button"
+              onClick={() => setselectedButtonIndex(0)}
+            >
               Your Profile
             </button>
           </li>
           {user.role === "ROLE_USER" && (
             <ul>
               <li>
-                <button onClick={() => setselectedButtonIndex(1)}>
+                <button
+                  className="menu--button"
+                  onClick={() => setselectedButtonIndex(1)}
+                >
                   Your Orders
                 </button>
               </li>
               <li>
-                <button onClick={() => setselectedButtonIndex(2)}>
+                <button
+                  className="menu--button"
+                  onClick={() => setselectedButtonIndex(2)}
+                >
                   Your Cars
                 </button>
               </li>
@@ -40,7 +49,10 @@ function Profile() {
 
           {user.role === "ROLE_WASHER" && (
             <li>
-              <button onClick={() => setselectedButtonIndex(3)}>
+              <button
+                className="menu--button"
+                onClick={() => setselectedButtonIndex(3)}
+              >
                 Your Bookings
               </button>
             </li>

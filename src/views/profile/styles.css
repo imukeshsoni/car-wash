@@ -6,4 +6,17 @@
 .container{
 	display: flex;
 	flex-direction: row;
+	background-color: #242424;
+}
+.menu--button{
+	width: 150px;
+	height: 40px;
+	border: 1px solid #fff;
+	color: #fff;
+	background-color: #242424;
+	border-radius: 5px;
+	margin-top: 5px;
+}
+.selected--menu{
+	margin-left: 50px;
 }

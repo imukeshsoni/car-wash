@@ -19,8 +19,10 @@ const Login = () => {
       login({
         name: res.data.name,
         email: res.data.email,
+        phone: res.data.phone,
         password: res.data.password,
         role: res.data.role,
+        username: res.data.username,
         rating: res.data.rating,
         loggedIn: true,
       })

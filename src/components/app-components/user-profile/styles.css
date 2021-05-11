@@ -1,0 +1,15 @@
+.details--table td{
+	color: #fff;
+	height: 30px;
+	border-bottom: 1px dashed #fff;
+	padding: 10px;
+}
+.user--details th{
+	border: 2px solid #fff ;
+	color: #fff;
+	font-size: 20px;
+	height: 40px;
+	width: 500px;
+	padding: 15px;
+	margin-bottom: 10px;
+}

@@ -3,6 +3,9 @@ import Footer from "../../components/app-components/footer/index.js";
 import ServicePlan from "../../components/app-components/service-plan/index.js";
 import "./styles.css";
 
+import { selectUser } from "../../redux/userSlice";
+import { useSelector } from "react-redux";
+
 const data = [
   {
     name: "SuperFast",
@@ -29,8 +32,10 @@ export function clickHandler(i) {
   return data[i];
 }
 function Services() {
+  const user = useSelector(selectUser);
+
   if (!user) {
-    return "Please Log in!";
+    return "Please log in as user";
   }
   return (
     <div>
