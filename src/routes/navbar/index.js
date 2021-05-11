@@ -32,6 +32,9 @@ const Navbar = () => {
     showButton();
   }, []);
 
+  if (!user) {
+    return "Please Log in!";
+  }
   return (
     <>
       <nav className="navbar">
@@ -48,15 +51,17 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
-            <li className="nav-item">
-              <Link
-                to="/services"
-                className="nav-links"
-                onClick={closeMobileMenu}
-              >
-                Services
-              </Link>
-            </li>
+            {user.role === "ROLE_USER" && (
+              <li className="nav-item">
+                <Link
+                  to="/services"
+                  className="nav-links"
+                  onClick={closeMobileMenu}
+                >
+                  Services
+                </Link>
+              </li>
+            )}
 
             <li className="nav-item">
               {user ? (
