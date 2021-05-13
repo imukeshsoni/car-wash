@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./styles.css";
+import LoggedInError from "../error/loggedIn";
 
 import { selectUser } from "../../redux/userSlice";
 import { setCars } from "../../redux/carSlice";
@@ -45,7 +46,7 @@ function Profile() {
   };
 
   if (!user) {
-    return "Please Log in!";
+    return "please Log In";
   }
 
   return (

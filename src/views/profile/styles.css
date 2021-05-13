@@ -1,7 +1,7 @@
 .side--nav{
-	width: 200px;
+	width: 150px;
 	position: sticky;
-
+	margin: 10px 10px 0 0;
 }
 .container{
 	display: flex;
@@ -14,9 +14,14 @@
 	border: 1px solid #fff;
 	color: #fff;
 	background-color: #242424;
+	transition: all 0.3s ease-out;
 	border-radius: 5px;
 	margin-top: 5px;
+	cursor: pointer;
 }
-.selected--menu{
-	margin-left: 50px;
+.menu--button:hover{
+	background-color: #fff;
+	color: #242424;
 }
+
+

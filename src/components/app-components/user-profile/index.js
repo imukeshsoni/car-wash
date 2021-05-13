@@ -1,12 +1,19 @@
 import React from "react";
 import "./styles.css";
+import LoggedInError from "../../../views/error/loggedIn";
 
 import { selectUser } from "../../../redux/userSlice";
 import { useSelector } from "react-redux";
 
 function UserProfile() {
-  const user = JSON.parse(localStorage.getItem("user"));
+  let user = useSelector(selectUser);
 
+  if (!user) {
+    user = JSON.parse(localStorage.getItem("user"));
+  }
+  if (!user) {
+    return <LoggedInError />;
+  }
   return (
     <div>
       <table className="user--details">
