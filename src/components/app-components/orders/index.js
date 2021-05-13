@@ -1,67 +1,28 @@
 import React, { useState } from "react";
-
 import "./styles.css";
 
+import { useSelector, useDispatch } from "react-redux";
+import { selectOrders, setOrders } from "../../../redux/orderSlice";
+
 function Order() {
-  const [status, setstatus] = useState(false);
-  let data = [
-    {
-      id: 1,
-      date: "2020-10-2",
-      address: "address",
-      orderstatus: "pending",
-      paymentmode: "Card",
-      paymentstatus: "pending",
-      serviceplan: "superfast",
-      vehicle: "BMW",
-      washername: "washer1",
-    },
-    {
-      id: 2,
-      date: "2020-10-2",
-      address: "address",
-      orderstatus: "pending",
-      paymentmode: "Card",
-      paymentstatus: "pending",
-      serviceplan: "superfast",
-      vehicle: "BMW",
-      washername: "washer1",
-    },
-    {
-      id: 3,
-      date: "2020-10-2",
-      address: "address",
-      orderstatus: "pending",
-      paymentmode: "Card",
-      paymentstatus: "pending",
-      serviceplan: "superfast",
-      vehicle: "BMW",
-      washername: "washer1",
-    },
-    {
-      id: 4,
-      date: "2020-10-2",
-      address: "address",
-      orderstatus: "pending",
-      paymentmode: "Card",
-      paymentstatus: "pending",
-      serviceplan: "superfast",
-      vehicle: "BMW",
-      washername: "washer1",
-    },
-  ];
+  let orders = useSelector(selectOrders);
 
   const handleCancel = (i) => {
     debugger;
-    data[i].orderstatus.replace("pending", "Cancelled");
-    debugger;
   };
+
+  if (!orders) {
+    orders = JSON.parse(localStorage.getItem("orders"));
+  }
+  if (!orders) {
+    return "No orders yet";
+  }
   return (
     <div className="orders--container">
-      orders
+      <h2>Your Orders</h2>
       <table>
-        <thead>
-          <th>Id</th>
+        <thead className="order--table--heading">
+          <th>Order Id</th>
           <th>Date</th>
           <th>Address</th>
           <th>Order Status</th>
@@ -69,27 +30,32 @@ function Order() {
           <th>Payment Status</th>
           <th>Service Plan</th>
           <th>Vehicle</th>
-          <th>Washer Name</th>
+          <th>Washer Contact</th>
           <th>Cancel Order</th>
         </thead>
         <tbody>
-          {data.map((value, i) => {
+          {orders.map((value, i) => {
             return (
-              <tr key={i}>
+              <tr className="order--table--row" key={i}>
                 <td>{value.id}</td>
                 <td>{value.date}</td>
-                <td>{value.address}</td>
-                <td>{value.orderstatus}</td>
-                <td>{value.paymentstatus}</td>
-                <td>{value.paymentmode}</td>
-                <td>{value.serviceplan}</td>
-                <td>{value.vehicle}</td>
-                <td>{value.washername}</td>
-                <td>
-                  <button onClick={(e) => handleCancel(value.id)}>
-                    Cancel
-                  </button>
-                </td>
+                <td>{value.location}</td>
+                <td>{value.orderStatus}</td>
+                <td>{value.paymentStatus}</td>
+                <td>{value.paymentMode}</td>
+                <td>{value.servicePlanId}</td>
+                <td>{value.vehicleId}</td>
+                <td>{value.washerEmail}</td>
+                {value.orderStatus == "pending" && (
+                  <td>
+                    <button
+                      className="cancel--btn"
+                      onClick={(e) => handleCancel(value.id)}
+                    >
+                      Cancel
+                    </button>
+                  </td>
+                )}
               </tr>
             );
           })}
