@@ -1,5 +1,5 @@
-const getCustomerOrdersById = "http://localhost:8081/user/getorders/customer/";
-const getWasherOrdersById = "http://localhost:8081/user/getorders/washer/";
+const getCustomerOrdersById = "http://localhost:8082/order/getbycustomer/";
+const getWasherOrdersById = "http://localhost:8082/order/getbywasher/";
 const getUserById = "http://localhost:8081/user/get/";
 const createUser = "http://localhost:8081/user/create";
 const getAllUsers = "http://localhost:8081/user/getall";

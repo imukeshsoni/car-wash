@@ -3,7 +3,6 @@ import Footer from "../../components/app-components/footer/index.js";
 import ServicePlan from "../../components/app-components/service-plan/index.js";
 import "./styles.css";
 
-
 const data = [
   {
     name: "SuperFast",
@@ -40,7 +39,7 @@ function Services() {
       <div className="service--container">
         <div className="service--items--container">
           <div className="custom--margin address--line">
-            <label for="address">Address</label>
+            <label htmlFor="address">Address</label>
             <br />
             <input
               type="text"
@@ -49,18 +48,18 @@ function Services() {
             />
           </div>
           <div className="custom--margin timing--line">
-            <label for="date">Wash Date</label>
+            <label htmlFor="date">Wash Date</label>
             <br />
             <input type="date" name="date" />
             <br />
 
-            <label for="time">Wash Time</label>
+            <label htmlFor="time">Wash Time</label>
             <br />
             <input type="time" name="time" />
             <br />
           </div>
           <div className="custom--margin car--section">
-            <label for="car">Select Your car</label>
+            <label htmlFor="car">Select Your car</label>
             <br />
             <select name="car">
               <option value="volvo">Volvo</option>
@@ -71,7 +70,7 @@ function Services() {
           </div>
 
           <div className="custom--margin service--plans">
-            <label for="paymentMode">Select Service Plan</label>
+            <label htmlFor="paymentMode">Select Service Plan</label>
             <br />
             <select name="services">
               <option value="superfast">Superfast</option>
@@ -80,7 +79,7 @@ function Services() {
           </div>
 
           <div className="custom--margin payment--section">
-            <label for="paymentMode">Payment Mode</label>
+            <label htmlFor="paymentMode">Payment Mode</label>
             <br />
             <select name="paymentMode">
               <option value="online">Online</option>

@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
 import "./styles.css";
+
 import { selectUser } from "../../redux/userSlice";
 import { setCars } from "../../redux/carSlice";
+import { setOrders } from "../../redux/orderSlice";
+
 import { useDispatch, useSelector } from "react-redux";
+
 import Order from "../../components/app-components/orders/index.js";
 import UserProfile from "../../components/app-components/user-profile/index.js";
 import Cars from "../../components/app-components/user-cars/index.js";
 import axios from "axios";
 import { getVehicleByCustomerId } from "../../apis/urls.js";
-import { getUserBookings } from "../../apis/apis";
+import { getCustomerOrdersById } from "../../apis/urls.js";
 
 function Profile() {
   const dispatch = useDispatch();
@@ -31,8 +35,13 @@ function Profile() {
 
   const handleOrders = () => {
     setselectedButtonIndex(1);
-    const data = getUserBookings(user.email);
-    debugger;
+    axios
+      .get(getCustomerOrdersById + user.email)
+      .then((res) => {
+        dispatch(setOrders(res.data));
+        localStorage.setItem("orders", JSON.stringify(res.data));
+      })
+      .catch((err) => alert(err));
   };
 
   if (!user) {
