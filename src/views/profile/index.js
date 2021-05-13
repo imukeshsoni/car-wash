@@ -1,14 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./styles.css";
-import { selectUser, logout } from "../../redux/userSlice";
+import { selectUser } from "../../redux/userSlice";
+import { setCars } from "../../redux/carSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Order from "../../components/app-components/orders/index.js";
 import UserProfile from "../../components/app-components/user-profile/index.js";
+import Cars from "../../components/app-components/user-cars/index.js";
+import axios from "axios";
+import { getVehicleByCustomerId } from "../../apis/urls.js";
+import { getUserBookings } from "../../apis/apis";
 
 function Profile() {
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
+  const user = JSON.parse(localStorage.getItem("user"));
+
   const [selectedButtonIndex, setselectedButtonIndex] = useState(0);
+
+  const handleCars = () => {
+    axios
+      .get(getVehicleByCustomerId + user.email)
+      .then((res) => {
+        dispatch(setCars(res.data));
+        localStorage.setItem("cars", JSON.stringify(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    setselectedButtonIndex(2);
+  };
+
+  const handleOrders = () => {
+    setselectedButtonIndex(1);
+    const data = getUserBookings(user.email);
+    debugger;
+  };
 
   if (!user) {
     return "Please Log in!";
@@ -29,18 +54,12 @@ function Profile() {
           {user.role === "ROLE_USER" && (
             <ul>
               <li>
-                <button
-                  className="menu--button"
-                  onClick={() => setselectedButtonIndex(1)}
-                >
+                <button className="menu--button" onClick={handleOrders}>
                   Your Orders
                 </button>
               </li>
               <li>
-                <button
-                  className="menu--button"
-                  onClick={() => setselectedButtonIndex(2)}
-                >
+                <button className="menu--button" onClick={handleCars}>
                   Your Cars
                 </button>
               </li>
@@ -63,6 +82,7 @@ function Profile() {
         {selectedButtonIndex == 0 && <UserProfile />}
 
         {selectedButtonIndex == 1 && <Order />}
+        {selectedButtonIndex == 2 && <Cars />}
       </div>
     </div>
   );

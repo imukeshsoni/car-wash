@@ -1,23 +1,18 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { getCustomerOrdersById } from "./urls";
 
 // const adminLoggedIn = false;
 // const washerLoggedIn = false;
-export function CustomerLogin(props) {
-  const [customer, setcustomer] = useState({});
-
-  const url = "http://localhost:8081/user/get/msony@gmail.com";
-  axios
-    .get(url)
+export function getUserBookings(email) {
+  const data = axios
+    .get(getCustomerOrdersById + email)
     .then((res) => {
-      debugger;
-      console.log(res);
-      debugger;
-      setcustomer(res);
+      return res.data;
     })
     .catch((err) => {
-      alert(err);
+      console.log(err);
     });
 
-  return { customer };
+  return data;
 }

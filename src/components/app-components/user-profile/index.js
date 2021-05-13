@@ -5,7 +5,7 @@ import { selectUser } from "../../../redux/userSlice";
 import { useSelector } from "react-redux";
 
 function UserProfile() {
-  const user = useSelector(selectUser);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   return (
     <div>

@@ -1,22 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./styles.css";
 
 function Order() {
-  const data = [
+  const [status, setstatus] = useState(false);
+  let data = [
     {
       id: 1,
-      date: "2020-10-2",
-      address: "address",
-      orderstatus: "pending",
-      paymentmode: "Card",
-      paymentstatus: "pending",
-      serviceplan: "superfast",
-      vehicle: "BMW",
-      washername: "washer1",
-    },
-    {
-      id: 2,
       date: "2020-10-2",
       address: "address",
       orderstatus: "pending",
@@ -48,10 +38,22 @@ function Order() {
       vehicle: "BMW",
       washername: "washer1",
     },
+    {
+      id: 4,
+      date: "2020-10-2",
+      address: "address",
+      orderstatus: "pending",
+      paymentmode: "Card",
+      paymentstatus: "pending",
+      serviceplan: "superfast",
+      vehicle: "BMW",
+      washername: "washer1",
+    },
   ];
+
   const handleCancel = (i) => {
     debugger;
-    data[i].orderstatus = "Cancelled";
+    data[i].orderstatus.replace("pending", "Cancelled");
     debugger;
   };
   return (
@@ -70,24 +72,28 @@ function Order() {
           <th>Washer Name</th>
           <th>Cancel Order</th>
         </thead>
-        {data.map((value, i) => {
-          return (
-            <tbody>
-              <td key={i}>{value.id}</td>
-              <td key={i}>{value.date}</td>
-              <td key={i}>{value.address}</td>
-              <td key={i}>{value.orderstatus}</td>
-              <td key={i}>{value.paymentstatus}</td>
-              <td key={i}>{value.paymentmode}</td>
-              <td key={i}>{value.serviceplan}</td>
-              <td key={i}>{value.vehicle}</td>
-              <td key={i}>{value.washername}</td>
-              <td key={i}>
-                <button onClick={(e) => handleCancel(value.id)}>Cancel</button>
-              </td>
-            </tbody>
-          );
-        })}
+        <tbody>
+          {data.map((value, i) => {
+            return (
+              <tr key={i}>
+                <td>{value.id}</td>
+                <td>{value.date}</td>
+                <td>{value.address}</td>
+                <td>{value.orderstatus}</td>
+                <td>{value.paymentstatus}</td>
+                <td>{value.paymentmode}</td>
+                <td>{value.serviceplan}</td>
+                <td>{value.vehicle}</td>
+                <td>{value.washername}</td>
+                <td>
+                  <button onClick={(e) => handleCancel(value.id)}>
+                    Cancel
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
     </div>
   );

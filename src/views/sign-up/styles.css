@@ -1,0 +1,38 @@
+.user--roles{
+	display: flex;
+	align-items: center;
+
+}
+.radio--btn{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+
+
+
+	border: 2px solid #999;
+	transition: 0.2s all linear;
+
+
+	position: relative;
+
+}
+
+input:checked {
+	border: 6px solid black;
+ }
+.signup--page{
+	margin-top: 20px;
+	height: 560px;
+	width: 500px;
+	background-color: #242424;
+	display: flex;
+	flex-direction: column;
+	border-radius: 10px;
+}
+.signup--page form{
+	color: #fff;
+	margin-top: 40px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}

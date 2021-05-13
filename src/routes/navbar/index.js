@@ -8,7 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 const Navbar = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const persistUser = JSON.parse(localStorage.getItem("user"));
   const logOut = () => {
+    localStorage.removeItem("user");
     dispatch(logout());
   };
   const [click, setClick] = useState(false);
@@ -30,7 +32,7 @@ const Navbar = () => {
 
   useEffect(() => {
     showButton();
-  }, []);
+  }, [user]);
 
   return (
     <>
@@ -48,7 +50,7 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
-            {user && user.role === "ROLE_USER" && (
+            {persistUser && persistUser.role === "ROLE_USER" && (
               <li className="nav-item">
                 <Link
                   to="/services"
@@ -61,7 +63,7 @@ const Navbar = () => {
             )}
 
             <li className="nav-item">
-              {user ? (
+              {persistUser ? (
                 <Link
                   to="/"
                   className="nav-links"
@@ -84,28 +86,27 @@ const Navbar = () => {
             </li>
 
             <li className="nav-item">
-              {user && (
+              {persistUser && (
                 <Link
                   to="/profile"
                   className="nav-links-mobile"
                   onClick={closeMobileMenu}
                 >
-                  {user.name}
+                  {persistUser.name}
                 </Link>
               )}
             </li>
           </ul>
           {/* When button variable is true, button is displayed */}
-          {button && user && (
+          {button && persistUser && (
             <Button
               linkTo="/profile"
               buttonStyle="btn--outline"
               onClick={() => {
-                console.log(user);
                 closeMobileMenu();
               }}
             >
-              {user.name}
+              {persistUser.name}
             </Button>
           )}
         </div>
