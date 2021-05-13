@@ -47,12 +47,12 @@ const Cars = () => {
   return (
     <div>
       <table className="table">
-        <thead className="table--heading">
-          <th>Car Brand</th>
-          <th>Car Name</th>
-          <th>Car Type</th>
-          <th>Car Manufactured Year</th>
-          <th>Car Number</th>
+        <thead>
+          <th className="table--heading">Car Brand</th>
+          <th className="table--heading">Car Name</th>
+          <th className="table--heading">Car Type</th>
+          <th className="table--heading">Car Manufactured Year</th>
+          <th className="table--heading">Car Number</th>
         </thead>
         <tbody>
           {cars.map((value, i) => {
