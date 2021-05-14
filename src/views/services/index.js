@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Footer from "../../components/app-components/footer/index.js";
-import ServicePlan from "../../components/app-components/service-plan/index.js";
 import "./styles.css";
+import { useSelector } from "react-redux";
+import { selectCars } from "../../redux/carSlice";
 
 const data = [
   {
@@ -31,6 +32,11 @@ export function clickHandler(i) {
 function Services() {
   const user = JSON.parse(localStorage.getItem("user"));
 
+  let cars = useSelector(selectCars);
+
+  if (!cars) {
+    cars = JSON.parse(localStorage.getItem("cars"));
+  }
   if (!user) {
     return "Please log in as user";
   }
@@ -62,10 +68,17 @@ function Services() {
             <label htmlFor="car">Select Your car</label>
             <br />
             <select name="car">
-              <option value="volvo">Volvo</option>
-              <option value="saab">Saab</option>
-              <option value="mercedes">Mercedes</option>
-              <option value="audi">Audi</option>
+              {cars ? (
+                cars.map((value, i) => {
+                  return (
+                    <option value={value.vehicleNumber} key={i}>
+                      {value.name}
+                    </option>
+                  );
+                })
+              ) : (
+                <option>Please add cars</option>
+              )}
             </select>
           </div>
 
