@@ -7,10 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
+  let user = useSelector(selectUser);
   const persistUser = JSON.parse(localStorage.getItem("user"));
+
   const logOut = () => {
-    localStorage.removeItem("user");
+    localStorage.clear();
     dispatch(logout());
   };
   const [click, setClick] = useState(false);
@@ -30,9 +31,9 @@ const Navbar = () => {
   //Whenever 'resize' event will occur, event listener will call showButton()
   window.addEventListener("resize", showButton);
 
-  useEffect(() => {
-    showButton();
-  }, [user]);
+  if (!user && persistUser != null) {
+    user = persistUser;
+  }
 
   return (
     <>
@@ -50,7 +51,7 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
-            {persistUser && persistUser.role === "ROLE_USER" && (
+            {user && user.role === "ROLE_USER" && (
               <li className="nav-item">
                 <Link
                   to="/services"
@@ -63,7 +64,7 @@ const Navbar = () => {
             )}
 
             <li className="nav-item">
-              {persistUser ? (
+              {user ? (
                 <Link
                   to="/"
                   className="nav-links"
@@ -86,19 +87,19 @@ const Navbar = () => {
             </li>
 
             <li className="nav-item">
-              {persistUser && (
+              {user && (
                 <Link
                   to="/profile"
                   className="nav-links-mobile"
                   onClick={closeMobileMenu}
                 >
-                  {persistUser.name}
+                  {user.name}
                 </Link>
               )}
             </li>
           </ul>
           {/* When button variable is true, button is displayed */}
-          {button && persistUser && (
+          {button && user && (
             <Button
               linkTo="/profile"
               buttonStyle="btn--outline"
@@ -106,7 +107,7 @@ const Navbar = () => {
                 closeMobileMenu();
               }}
             >
-              {persistUser.name}
+              {user.name}
             </Button>
           )}
         </div>
