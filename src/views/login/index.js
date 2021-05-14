@@ -20,7 +20,6 @@ const Login = () => {
 
   // Set user state in redux with details received from backend
   const setUser = (res) => {
-
     const userData = {
       name: res.data.name,
       email: res.data.email,
@@ -32,9 +31,7 @@ const Login = () => {
       loggedIn: true,
     };
 
-    dispatch(
-      login(userData)
-    );
+    dispatch(login(userData));
     setEmail("");
     setPassword("");
 
@@ -54,7 +51,6 @@ const Login = () => {
         } else {
           setcorrectCredentials(false);
         }
-        console.log(res);
       })
       .catch((err) => {
         alert(err);
@@ -80,6 +76,7 @@ const Login = () => {
               type="password"
               value={password}
               placeholder="Password"
+              autoComplete="current-password"
               onChange={(e) => setPassword(e.target.value)}
               required
             />
