@@ -39,37 +39,8 @@ const Cars = () => {
       .catch((err) => console.log(err));
   };
 
-  const persistCars = JSON.parse(localStorage.getItem("cars"));
-
-  if (persistCars) {
-    cars = persistCars;
-  }
-  return (
-    <div>
-      <table className="table">
-        <thead>
-          <th className="table--heading">Car Brand</th>
-          <th className="table--heading">Car Name</th>
-          <th className="table--heading">Car Type</th>
-          <th className="table--heading">Car Manufactured Year</th>
-          <th className="table--heading">Car Number</th>
-        </thead>
-        <tbody>
-          {cars.map((value, i) => {
-            return (
-              <tr className="table--body" key={i}>
-                <td>{value.brand}</td>
-
-                <td>{value.name}</td>
-                <td>{value.type}</td>
-                <td>{value.manufacturedYear}</td>
-
-                <td>{value.vehicleNumber}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+  function addCarForm() {
+    return (
       <div>
         <form className="car--form" onSubmit={(e) => handleAddCar(e)}>
           <input
@@ -116,6 +87,44 @@ const Cars = () => {
           <input className="submit--btn" type="submit" value="Add Car" />
         </form>
       </div>
+    );
+  }
+
+  const persistCars = JSON.parse(localStorage.getItem("cars"));
+
+  if (!cars && persistCars != null) {
+    cars = persistCars;
+  }
+  if (!cars) {
+    return <h2>No cars found. Please add your cars. {addCarForm()}</h2>;
+  }
+  return (
+    <div>
+      <table className="table">
+        <thead>
+          <th className="table--heading">Car Brand</th>
+          <th className="table--heading">Car Name</th>
+          <th className="table--heading">Car Type</th>
+          <th className="table--heading">Car Manufactured Year</th>
+          <th className="table--heading">Car Number</th>
+        </thead>
+        <tbody>
+          {cars.map((value, i) => {
+            return (
+              <tr className="table--body" key={i}>
+                <td>{value.brand}</td>
+
+                <td>{value.name}</td>
+                <td>{value.type}</td>
+                <td>{value.manufacturedYear}</td>
+
+                <td>{value.vehicleNumber}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      {addCarForm()}
     </div>
   );
 };
