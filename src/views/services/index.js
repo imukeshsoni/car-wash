@@ -1,17 +1,19 @@
 import React from "react";
 import Footer from "../../components/app-components/footer/index.js";
 import "./styles.css";
-import { useSelector } from "react-redux";
-import { selectCars } from "../../redux/carSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { selectCars, setCars } from "../../redux/carSlice";
 
 function Services() {
   const user = JSON.parse(localStorage.getItem("user"));
   const plans = JSON.parse(localStorage.getItem("plans"));
+  const persistCars = JSON.parse(localStorage.getItem("cars"));
 
   let cars = useSelector(selectCars);
+  const dispatch = useDispatch();
 
   if (!cars) {
-    cars = JSON.parse(localStorage.getItem("cars"));
+    dispatch(setCars(persistCars));
   }
   if (!user) {
     return "Please log in as user";
