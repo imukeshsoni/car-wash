@@ -12,8 +12,10 @@ import Order from "../../components/app-components/orders/index.js";
 import UserProfile from "../../components/app-components/user-profile/index.js";
 import Cars from "../../components/app-components/user-cars/index.js";
 import axios from "axios";
-import { getVehicleByCustomerId } from "../../apis/urls.js";
-import { getCustomerOrdersById } from "../../apis/urls.js";
+import {
+  getVehicleByCustomerId,
+  getCustomerOrdersById,
+} from "../../apis/urls.js";
 
 function Profile() {
   const dispatch = useDispatch();
