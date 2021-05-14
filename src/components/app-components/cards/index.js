@@ -1,9 +1,6 @@
 import React from "react";
 import CardItem from "./card-item/index.js";
 import "./styles.css";
-import image1 from "../../../assets/images/superfast.jpeg";
-import image2 from "../../../assets/images/img-2.jpg";
-import image3 from "../../../assets/images/img-home.jpg";
 function Cards() {
   const plans = JSON.parse(localStorage.getItem("plans"));
 
