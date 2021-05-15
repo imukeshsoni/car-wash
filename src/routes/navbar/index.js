@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../../components/base-components/button/index.js";
 import "./styles.css";
@@ -40,7 +40,7 @@ const Navbar = () => {
       <nav className="navbar">
         <div className="navbar-container">
           <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
-            WASHIVO
+            <i className="fas fa-wind" /> WASHIVO
           </Link>
           <div className="menu-icon" onClick={clickHandler}>
             <i className={click ? "fas fa-times " : "fas fa-bars"} />

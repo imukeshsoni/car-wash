@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./styles.css";
 import { useSelector, useDispatch } from "react-redux";
 import { selectCars, setCars } from "../../../redux/carSlice";
@@ -127,9 +127,9 @@ const Cars = () => {
       <table className="table">
         <thead>
           <th className="table--heading">Car Brand</th>
-          <th className="table--heading">Car Name</th>
+          <th className="table--heading">Car Model</th>
           <th className="table--heading">Car Type</th>
-          <th className="table--heading">Car Manufactured Year</th>
+          <th className="table--heading">Model Year</th>
           <th className="table--heading">Car Number</th>
           <th className="table--heading">Delete Car</th>
         </thead>

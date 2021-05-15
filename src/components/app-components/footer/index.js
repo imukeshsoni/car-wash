@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import "./styles.css";
-import { Button } from "../../base-components/button/index.js";
 import Input from "../../base-components/input";
 import axios from "axios";
-import { sha512 } from "js-sha512";
 
 export class Footer extends Component {
   constructor() {
@@ -26,7 +24,6 @@ export class Footer extends Component {
 
   subscribeHandler = (event) => {
     event.preventDefault();
-    //TODO: Move to API folder
     axios
       .post("http://localhost:8081/subscribe", this.state.email)
       .then((res) => {
@@ -48,7 +45,10 @@ export class Footer extends Component {
   render() {
     return (
       <div className="footer--conatiner">
-        <h3 className="footer--heading">WASHIVO</h3>
+        <h3 className="footer--heading">
+          {" "}
+          <i className="fas fa-wind" />WASHIVO
+        </h3>
 
         <form onSubmit={this.subscribeHandler} className="footer--heading">
           <h2>Subscribe to our newsletters and offers</h2>

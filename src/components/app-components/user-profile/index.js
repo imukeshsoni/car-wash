@@ -14,6 +14,7 @@ function UserProfile() {
   if (!user) {
     return <LoggedInError />;
   }
+
   return (
     <div>
       <table className="user--details">
@@ -22,19 +23,19 @@ function UserProfile() {
         </thead>
         <tbody className="details--table">
           <tr>
-            <td>User Name</td>
+            <td>User Name : </td>
             <td>{user.name}</td>
           </tr>
           <tr>
-            <td>Email</td>
+            <td>Email : </td>
             <td>{user.email}</td>
           </tr>
           <tr>
-            <td>Nick Name</td>
+            <td>Nick Name : </td>
             <td>{user.username}</td>
           </tr>
           <tr>
-            <td>Phone Number</td>
+            <td>Phone Number : </td>
             <td>{user.phone}</td>
           </tr>
         </tbody>

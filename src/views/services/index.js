@@ -27,10 +27,10 @@ function Services() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (servicePlanName == "") {
+    if (servicePlanName === "") {
       seterrorMessage("Please select plan to coninue");
       return;
-    } else if (vehicleId == "") {
+    } else if (vehicleId === "") {
       seterrorMessage("please select car for wash");
       return;
     }
@@ -142,7 +142,7 @@ function Services() {
                 id="service"
                 onChange={(e) => {
                   const filterPlan = plans.filter((t, i) => {
-                    return t.serviceId == e.target.value;
+                    return t.serviceId === e.target.value;
                   });
                   if (filterPlan.length > 0) {
                     const selectedPlan = filterPlan[0];
