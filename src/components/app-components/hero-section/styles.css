@@ -28,6 +28,13 @@
 }
 .hero-btns .btn{
 	margin: 6px;
+	color:#fff;
+	background-color: transparent;
+}
+.btn:hover
+{
+	background-color: #242424;
+	color:#fff;
 }
 
 @media screen and (max-width: 960px) {

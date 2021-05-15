@@ -30,6 +30,7 @@ function Profile() {
   const [selectedButtonIndex, setselectedButtonIndex] = useState(0);
 
   const handleCars = () => {
+    setselectedButtonIndex(2);
     axios
       .get(getVehicleByCustomerId + user.email)
       .then((res) => {
@@ -39,7 +40,6 @@ function Profile() {
       .catch((err) => {
         console.log(err);
       });
-    setselectedButtonIndex(2);
   };
 
   const handleOrders = () => {

@@ -5,8 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectCars, setCars } from "../../redux/carSlice";
 import axios from "axios";
 import { createOrder } from "../../apis/urls";
+import { useHistory } from "react-router";
 
 function Services() {
+  const history = useHistory();
   const user = JSON.parse(localStorage.getItem("user"));
   const plans = JSON.parse(localStorage.getItem("plans"));
   const persistCars = JSON.parse(localStorage.getItem("cars"));
@@ -51,6 +53,7 @@ function Services() {
       .post(createOrder, orderData)
       .then((response) => {
         alert("Thank you! Your Booking is successfully created!");
+        history.push("/profile");
       })
       .catch((err) => alert(err));
   };
