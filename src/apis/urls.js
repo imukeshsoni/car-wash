@@ -9,6 +9,7 @@ const createOrder = "http://localhost:8082/order/create";
 const getOrderById = "http://localhost:8082/order/get/";
 const getAllOrders = "http://localhost:8082/order/get/all";
 const updateOrderById = "http://localhost:8082/order/update/";
+const cancelOrderById = "http://localhost:8082/order/cancel/";
 const createServicePlan = "http://localhost:8082/service/create";
 const deleteServicePlanById = "http://localhost:8082/service/delete/";
 const getServicePlanById = "http://localhost:8082/service/get/";
@@ -41,6 +42,7 @@ export {
   deleteServicePlanById,
   createServicePlan,
   updateOrderById,
+  cancelOrderById,
   getAllOrders,
   createOrder,
   updateUserById,

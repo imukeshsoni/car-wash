@@ -18,7 +18,7 @@
 .car--section > select {
   width: 400px;
 }
-.service--items--container > form > div > input {
+input {
   margin: 10px;
   height: 30px;
   font-size: 15px;
