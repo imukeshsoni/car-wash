@@ -1,50 +1,53 @@
-.service--container{
-display: flex;
-flex-direction: column;
-align-items: center;
+.service--container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.service--items--container {
+  width: 500px;
+  background-color: #242424;
+  margin: 20px;
 
+  border-radius: 10px;
+  border: 2px solid #242424;
+  padding-top: 10px;
 }
-.service--items--container{
-	width: 500px;
-	background-color: #242424;
-	margin: 20px;
-
-	border-radius: 10px;
-	border: 2px solid #242424 ;
-	padding-top: 10px;
+.custom--margin {
+  margin-left: 20px;
 }
-.custom--margin{
-	margin-left: 20px;
+.car--section > select {
+  width: 400px;
 }
-input{
-	margin: 10px;
-	height: 30px;
-	font-size: 15px;
-	color: #242424;
-	border-radius: 5px;
-	padding:15px;
-
+.service--items--container > form > div > input {
+  margin: 10px;
+  height: 30px;
+  font-size: 15px;
+  color: #242424;
+  border-radius: 5px;
+  padding: 15px;
 }
-select, button[name="submit"]{
-	margin: 10px;
-	width: 150px;
-	height: 40px;
-	font-size: 15px;
-	color: #242424;
-	border-radius: 5px;
-
+select,
+button[name="submit"] {
+  margin: 10px;
+  width: 150px;
+  height: 40px;
+  font-size: 15px;
+  color: #242424;
+  border-radius: 5px;
 }
-label{
-	color: aliceblue;
+.service--items--container > form > div > label {
+  color: aliceblue;
 }
-car{
-	color: black;
+.warning {
+  text-align: center;
+  font-size: 18px;
+  margin: 0 4rem 5px 0;
+  font-weight: 500;
+  font-family: BlinkMacSystemFont, 'Segoe UI';
 }
-
-
 
 @media screen and (max-width: 720px) {
-	.service--items--container{
-		width: 400px;
-	}
+  .service--items--container {
+    width: 400px;
+  }
 }

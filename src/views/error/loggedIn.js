@@ -1,6 +1,5 @@
 import React from "react";
 
-import image from "../../assets/images/login.png";
 function LoggedInError(props) {
   return (
     <div className="container">
