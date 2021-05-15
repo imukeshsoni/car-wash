@@ -39,12 +39,14 @@ function Services() {
       vehicleId: vehicleId,
       servicePlan: servicePlanName,
       date: date,
+      time: time,
       location: location,
       orderStatus: "pending",
       paymentStatus: paymentStatus,
       paymentMode: paymentMode,
+      orderAmount: amount,
     };
-    debugger;
+
     axios
       .post(createOrder, orderData)
       .then((response) => {

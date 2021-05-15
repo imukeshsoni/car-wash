@@ -24,6 +24,8 @@ function Order() {
         <thead className="order--table--heading">
           <th>Order Id</th>
           <th>Date</th>
+          <th>Time</th>
+
           <th>Address</th>
           <th>Order Status</th>
           <th>Payment Mode</th>
@@ -39,11 +41,12 @@ function Order() {
               <tr className="order--table--row" key={i}>
                 <td>{value.id}</td>
                 <td>{value.date}</td>
+                <td>{value.time}</td>
                 <td>{value.location}</td>
                 <td>{value.orderStatus}</td>
-                <td>{value.paymentStatus}</td>
                 <td>{value.paymentMode}</td>
-                <td>{value.servicePlanId}</td>
+                <td>{value.paymentStatus}</td>
+                <td>{value.servicePlan}</td>
                 <td>{value.vehicleId}</td>
                 <td>{value.washerEmail}</td>
                 {value.orderStatus == "pending" && (
