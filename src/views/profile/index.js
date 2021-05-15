@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./styles.css";
-import LoggedInError from "../error/loggedIn";
-
-import { selectUser } from "../../redux/userSlice";
-import { setCars } from "../../redux/carSlice";
-import { setOrders, selectOrders } from "../../redux/orderSlice";
 
 import { useDispatch, useSelector } from "react-redux";
+import { setCars } from "../../redux/carSlice";
+import { setOrders, selectOrders } from "../../redux/orderSlice";
 
 import Order from "../../components/app-components/orders/index.js";
 import UserProfile from "../../components/app-components/user-profile/index.js";
 import Cars from "../../components/app-components/user-cars/index.js";
+import Footer from "../../components/app-components/footer/index.js";
+
 import axios from "axios";
+
 import {
   getVehicleByCustomerId,
   getCustomerOrdersById,
+  getWasherOrdersById,
 } from "../../apis/urls.js";
 
 function Profile() {
@@ -43,13 +44,24 @@ function Profile() {
 
   const handleOrders = () => {
     setselectedButtonIndex(1);
-    axios
-      .get(getCustomerOrdersById + user.email)
-      .then((res) => {
-        dispatch(setOrders(res.data));
-        localStorage.setItem("orders", JSON.stringify(res.data));
-      })
-      .catch((err) => alert(err));
+
+    if (user.role === "ROLE_USER") {
+      axios
+        .get(getCustomerOrdersById + user.email)
+        .then((res) => {
+          dispatch(setOrders(res.data));
+          localStorage.setItem("orders", JSON.stringify(res.data));
+        })
+        .catch((err) => alert(err));
+    } else if (user.ROLE === "ROLE_WASHER") {
+      axios
+        .get(getWasherOrdersById + user.email)
+        .then((res) => {
+          dispatch(setOrders(res.data));
+          localStorage.setItem("orders", JSON.stringify(res.data));
+        })
+        .catch((err) => alert(err));
+    }
   };
 
   if (!user) {
@@ -57,50 +69,41 @@ function Profile() {
   }
 
   return (
-    <div className="container">
-      <div className="side--nav">
-        <ul>
-          <li>
-            <button
-              className="menu--button"
-              onClick={() => setselectedButtonIndex(0)}
-            >
-              Your Profile
-            </button>
-          </li>
-          {user.role === "ROLE_USER" && (
-            <ul>
-              <li>
-                <button className="menu--button" onClick={handleOrders}>
-                  Your Orders
-                </button>
-              </li>
-              <li>
-                <button className="menu--button" onClick={handleCars}>
-                  Your Cars
-                </button>
-              </li>
-            </ul>
-          )}
-
-          {user.role === "ROLE_WASHER" && (
+    <div>
+      <div className="container">
+        <div className="side--nav">
+          <ul>
             <li>
               <button
                 className="menu--button"
-                onClick={() => setselectedButtonIndex(3)}
+                onClick={() => setselectedButtonIndex(0)}
               >
+                Your Profile
+              </button>
+            </li>
+            <li>
+              <button className="menu--button" onClick={handleOrders}>
                 Your Bookings
               </button>
             </li>
-          )}
-        </ul>
+            {user.role === "ROLE_USER" && (
+              <ul>
+                <li>
+                  <button className="menu--button" onClick={handleCars}>
+                    Your Cars
+                  </button>
+                </li>
+              </ul>
+            )}
+          </ul>
+        </div>
+        <div className="selected--menu">
+          {selectedButtonIndex == 0 && <UserProfile />}
+          {selectedButtonIndex == 1 && <Order />}
+          {selectedButtonIndex == 2 && <Cars />}
+        </div>
       </div>
-      <div className="selected--menu">
-        {selectedButtonIndex == 0 && <UserProfile />}
-
-        {selectedButtonIndex == 1 && <Order />}
-        {selectedButtonIndex == 2 && <Cars />}
-      </div>
+      <Footer />
     </div>
   );
 }
