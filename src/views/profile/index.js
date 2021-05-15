@@ -6,7 +6,7 @@ import { selectUser } from "../../redux/userSlice";
 import { setCars } from "../../redux/carSlice";
 import { setOrders } from "../../redux/orderSlice";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import Order from "../../components/app-components/orders/index.js";
 import UserProfile from "../../components/app-components/user-profile/index.js";

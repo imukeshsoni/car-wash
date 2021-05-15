@@ -32,6 +32,7 @@ function Order() {
           <th>Payment Status</th>
           <th>Service Plan</th>
           <th>Vehicle</th>
+          <th>Amount</th>
           <th>Washer Contact</th>
           <th>Cancel Order</th>
         </thead>
@@ -48,12 +49,13 @@ function Order() {
                 <td>{value.paymentStatus}</td>
                 <td>{value.servicePlan}</td>
                 <td>{value.vehicleId}</td>
+                <td>{value.orderAmount}</td>
                 <td>{value.washerEmail}</td>
                 {value.orderStatus == "pending" && (
                   <td>
                     <button
                       className="cancel--btn"
-                      onClick={(e) => handleCancel(value.id)}
+                      onClick={handleCancel(value.id)}
                     >
                       Cancel
                     </button>
