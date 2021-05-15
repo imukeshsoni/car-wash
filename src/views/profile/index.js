@@ -4,9 +4,9 @@ import LoggedInError from "../error/loggedIn";
 
 import { selectUser } from "../../redux/userSlice";
 import { setCars } from "../../redux/carSlice";
-import { setOrders } from "../../redux/orderSlice";
+import { setOrders, selectOrders } from "../../redux/orderSlice";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Order from "../../components/app-components/orders/index.js";
 import UserProfile from "../../components/app-components/user-profile/index.js";
@@ -20,6 +20,11 @@ import {
 function Profile() {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("user"));
+  let orders = useSelector(selectOrders);
+
+  if (!orders) {
+    orders = JSON.parse(localStorage.getItem("orders"));
+  }
 
   const [selectedButtonIndex, setselectedButtonIndex] = useState(0);
 
