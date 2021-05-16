@@ -1,15 +1,19 @@
-.details--table td{
+.details--table > tr>  td{
 	color: #fff;
 	height: 30px;
-	border-bottom: 1px dashed #fff;
 	padding: 10px;
+	font-size: 20px;
 }
-.user--details th{
-	border: 2px solid #fff ;
+.user--details >thead> th{
+	border: 2px dotted #fff ;
 	color: #fff;
 	font-size: 20px;
 	height: 40px;
-	width: 500px;
+	width: 800px;
 	padding: 15px;
 	margin-bottom: 10px;
+	border-radius: 10px;
+}
+.user--details{
+	justify-content: center;
 }

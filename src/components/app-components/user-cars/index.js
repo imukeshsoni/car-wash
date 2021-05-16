@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./styles.css";
 import { useSelector, useDispatch } from "react-redux";
 import { selectCars, setCars } from "../../../redux/carSlice";
 import axios from "axios";
-import { createVehicle } from "../../../apis/urls";
+import {
+  createVehicle,
+  deleteVehicleById,
+  getVehicleByCustomerId,
+} from "../../../apis/urls";
 
 const Cars = () => {
   let cars = useSelector(selectCars);
@@ -14,6 +18,15 @@ const Cars = () => {
   const [carType, setcarType] = useState("");
 
   const user = JSON.parse(localStorage.getItem("user"));
+  axios
+    .get(getVehicleByCustomerId + user.email)
+    .then((res) => {
+      dispatch(setCars(res.data));
+      localStorage.setItem("cars", JSON.stringify(res.data));
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   const dispatch = useDispatch();
 
@@ -29,13 +42,24 @@ const Cars = () => {
       manufacturedYear: carYear,
     };
 
-    cars = [...cars, newCar];
-
-    dispatch(setCars(cars));
-    localStorage.setItem("cars", JSON.stringify(cars));
     axios
       .post(createVehicle, newCar)
       .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+
+    setcarName("");
+    setcarBrand("");
+    setcarYear("");
+    setcarNumber("");
+    setcarType("");
+  };
+
+  const handleDeleteCar = (carId) => {
+    axios
+      .delete(deleteVehicleById + carId)
+      .then((res) => {
+        console.log(res);
+      })
       .catch((err) => console.log(err));
   };
 
@@ -103,22 +127,27 @@ const Cars = () => {
       <table className="table">
         <thead>
           <th className="table--heading">Car Brand</th>
-          <th className="table--heading">Car Name</th>
+          <th className="table--heading">Car Model</th>
           <th className="table--heading">Car Type</th>
-          <th className="table--heading">Car Manufactured Year</th>
+          <th className="table--heading">Model Year</th>
           <th className="table--heading">Car Number</th>
+          <th className="table--heading">Delete Car</th>
         </thead>
         <tbody>
           {cars.map((value, i) => {
             return (
               <tr className="table--body" key={i}>
                 <td>{value.brand}</td>
-
                 <td>{value.name}</td>
                 <td>{value.type}</td>
                 <td>{value.manufacturedYear}</td>
 
                 <td>{value.vehicleNumber}</td>
+                <td>
+                  <button onClick={() => handleDeleteCar(value.vehicleNumber)}>
+                    Delete
+                  </button>
+                </td>
               </tr>
             );
           })}

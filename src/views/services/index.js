@@ -5,8 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectCars, setCars } from "../../redux/carSlice";
 import axios from "axios";
 import { createOrder } from "../../apis/urls";
+import { useHistory } from "react-router";
 
 function Services() {
+  const history = useHistory();
   const user = JSON.parse(localStorage.getItem("user"));
   const plans = JSON.parse(localStorage.getItem("plans"));
   const persistCars = JSON.parse(localStorage.getItem("cars"));
@@ -25,10 +27,10 @@ function Services() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (servicePlanName == "") {
+    if (servicePlanName === "") {
       seterrorMessage("Please select plan to coninue");
       return;
-    } else if (vehicleId == "") {
+    } else if (vehicleId === "") {
       seterrorMessage("please select car for wash");
       return;
     }
@@ -51,6 +53,7 @@ function Services() {
       .post(createOrder, orderData)
       .then((response) => {
         alert("Thank you! Your Booking is successfully created!");
+        history.push("/profile");
       })
       .catch((err) => alert(err));
   };
@@ -139,7 +142,7 @@ function Services() {
                 id="service"
                 onChange={(e) => {
                   const filterPlan = plans.filter((t, i) => {
-                    return t.serviceId == e.target.value;
+                    return t.serviceId === e.target.value;
                   });
                   if (filterPlan.length > 0) {
                     const selectedPlan = filterPlan[0];

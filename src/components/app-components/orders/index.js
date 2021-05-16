@@ -4,16 +4,58 @@ import "./styles.css";
 import { useSelector, useDispatch } from "react-redux";
 import { selectOrders, setOrders } from "../../../redux/orderSlice";
 import axios from "axios";
-import { cancelOrderById, getCustomerOrdersById } from "../../../apis/urls";
+import {
+  cancelOrderById,
+  updateOrderById,
+  getCustomerOrdersById,
+  getWasherOrdersById,
+} from "../../../apis/urls";
 
 function Order() {
   let orders = useSelector(selectOrders);
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("user"));
+  const [column, setColumn] = useState(true);
+
+  const showColumn = () => {
+    if (window.innerWidth <= 960) {
+      setColumn(false);
+    } else {
+      setColumn(true);
+    }
+  };
+
+  window.addEventListener("resize", showColumn);
+
+  if (user.role === "ROLE_WASHER") {
+    axios
+      .get(getWasherOrdersById + user.email)
+      .then((res) => {
+        dispatch(setOrders(res.data));
+        localStorage.setItem("orders", JSON.stringify(res.data));
+      })
+      .catch((err) => alert(err));
+
+    if (!orders) {
+      orders = JSON.parse(localStorage.getItem("orders"));
+    }
+  } else if (user.role === "ROLE_USER") {
+    axios
+      .get(getCustomerOrdersById + user.email)
+      .then((res) => {
+        dispatch(setOrders(res.data));
+        localStorage.setItem("orders", JSON.stringify(res.data));
+      })
+      .catch((err) => alert(err));
+
+    if (!orders) {
+      orders = JSON.parse(localStorage.getItem("orders"));
+    }
+  }
 
   const handleCancel = (i) => {
     let filterOrder = orders.filter((value, index) => {
-      return value.id == i;
+      return value.id === i;
     });
     axios
       .put(cancelOrderById + i, filterOrder[0])
@@ -21,62 +63,110 @@ function Order() {
         console.log(res);
       })
       .catch((err) => console.log(err));
+  };
+
+  const handleComplete = (i) => {
+    let filterBooking = orders.filter((value, index) => {
+      return value.id === i;
+    });
+
+    const updatedBooking = {
+      id: i,
+      customerEmail: filterBooking[0].customerEmail,
+      washerEmail: filterBooking[0].washerEmail,
+      vehicleId: filterBooking[0].vehicleId,
+      servicePlan: filterBooking[0].servicePlan,
+      date: filterBooking[0].date,
+      time: filterBooking[0].time,
+      location: filterBooking[0].location,
+      orderStatus: "completed",
+      paymentStatus: filterBooking[0].paymentStatus,
+      paymentMode: filterBooking[0].paymentMode,
+      orderAmount: filterBooking[0].orderAmount,
+    };
 
     axios
-      .get(getCustomerOrdersById + user.email)
+      .put(updateOrderById + i, updatedBooking)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+
+    axios
+      .get(getWasherOrdersById + user.email)
       .then((res) => {
         dispatch(setOrders(res.data));
-        localStorage.setItem("orders", JSON.stringify(res.data));
+        localStorage.setItem("bookings", JSON.stringify(res.data));
       })
       .catch((err) => {
         console.log(err);
         alert(err);
       });
   };
+
   if (!orders) {
     orders = JSON.parse(localStorage.getItem("orders"));
   }
 
+  if (orders.length < 1) {
+    return <h2>You don't have any bookings!</h2>;
+  }
   return (
     <div className="orders--container">
-      <h2>Your Orders</h2>
+      <h2>Your Bookings</h2>
       <table>
         <thead className="order--table--heading">
-          <th>Order Id</th>
+          {column && <th>Order Id</th>}
+
           <th>Date</th>
           <th>Time</th>
-          <th>Address</th>
-          <th>Order Status</th>
-          <th>Payment Mode</th>
+          {column && <th>Address</th>}
+          {column && <th>Order Status</th>}
+          {column && <th>Payment Mode</th>}
           <th>Payment Status</th>
-          <th>Service Plan</th>
+          {column && <th>Service Plan</th>}
+
           <th>Vehicle</th>
           <th>Amount</th>
           <th>Washer Contact</th>
-          <th>Cancel</th>
+          {user.role === "ROLE_USER" ? <th>Cancel</th> : <th>Complete</th>}
         </thead>
         <tbody>
           {orders.map((value, i) => {
             return (
               <tr className="order--table--row" key={i}>
-                <td>{value.id}</td>
+                {column && <td>{value.id}</td>}
+
                 <td>{value.date}</td>
                 <td>{value.time}</td>
-                <td>{value.location}</td>
-                <td>{value.orderStatus}</td>
-                <td>{value.paymentMode}</td>
+                {column && <td>{value.location}</td>}
+
+                {column && <td>{value.orderStatus}</td>}
+
+                {column && <td>{value.paymentMode}</td>}
                 <td>{value.paymentStatus}</td>
-                <td>{value.servicePlan}</td>
+                {column && <td>{value.servicePlan}</td>}
+
                 <td>{value.vehicleId}</td>
                 <td>{value.orderAmount}</td>
                 <td>{value.washerEmail}</td>
-                {value.orderStatus == "pending" && (
+                {user.role === "ROLE_USER" && value.orderStatus === "pending" && (
                   <td>
                     <button
                       className="cancel--btn"
-                      onClick={(e) => handleCancel(value.id)}
+                      onClick={() => handleCancel(value.id)}
                     >
                       Cancel
+                    </button>
+                  </td>
+                )}
+                {user.role === "ROLE_WASHER" && value.orderStatus === "pending" && (
+                  <td>
+                    <button
+                      className="cancel--btn"
+                      onClick={() => handleComplete(value.id)}
+                    >
+                      Complete
                     </button>
                   </td>
                 )}

@@ -30,6 +30,7 @@ function Profile() {
   const [selectedButtonIndex, setselectedButtonIndex] = useState(0);
 
   const handleCars = () => {
+    setselectedButtonIndex(2);
     axios
       .get(getVehicleByCustomerId + user.email)
       .then((res) => {
@@ -39,7 +40,6 @@ function Profile() {
       .catch((err) => {
         console.log(err);
       });
-    setselectedButtonIndex(2);
   };
 
   const handleOrders = () => {
@@ -71,36 +71,28 @@ function Profile() {
   return (
     <div>
       <div className="container">
-        <div className="side--nav">
-          <ul>
-            <li>
-              <button
-                className="menu--button"
-                onClick={() => setselectedButtonIndex(0)}
-              >
-                Your Profile
-              </button>
-            </li>
-            <li>
-              <button className="menu--button" onClick={handleOrders}>
-                Your Bookings
-              </button>
-            </li>
-            {user.role === "ROLE_USER" && (
-              <ul>
-                <li>
-                  <button className="menu--button" onClick={handleCars}>
-                    Your Cars
-                  </button>
-                </li>
-              </ul>
-            )}
-          </ul>
-        </div>
+        <span className="side--nav">
+          <button
+            className="menu--button"
+            onClick={() => setselectedButtonIndex(0)}
+          >
+            Your Profile
+          </button>
+
+          <button className="menu--button" onClick={handleOrders}>
+            Your Bookings
+          </button>
+
+          {user.role === "ROLE_USER" && (
+            <button className="menu--button" onClick={handleCars}>
+              Your Cars
+            </button>
+          )}
+        </span>
         <div className="selected--menu">
-          {selectedButtonIndex == 0 && <UserProfile />}
-          {selectedButtonIndex == 1 && <Order />}
-          {selectedButtonIndex == 2 && <Cars />}
+          {selectedButtonIndex === 0 && <UserProfile />}
+          {selectedButtonIndex === 1 && <Order />}
+          {selectedButtonIndex === 2 && <Cars />}
         </div>
       </div>
       <Footer />
