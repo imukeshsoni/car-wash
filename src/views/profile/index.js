@@ -9,6 +9,7 @@ import Order from "../../components/app-components/orders/index.js";
 import UserProfile from "../../components/app-components/user-profile/index.js";
 import Cars from "../../components/app-components/user-cars/index.js";
 import Footer from "../../components/app-components/footer/index.js";
+import Bookings from "../../components/app-components/bookings/index.js";
 
 import axios from "axios";
 
@@ -67,11 +68,18 @@ function Profile() {
               Your Cars
             </button>
           )}
+          {user.role !== "ROLE_USER" && (
+            <button className="menu--button" onClick={() => setselectedButtonIndex(3)}>
+              Available Bookings
+            </button>
+          )}
         </span>
         <div className="selected--menu">
           {selectedButtonIndex === 0 && <UserProfile />}
           {selectedButtonIndex === 1 && <Order />}
           {selectedButtonIndex === 2 && <Cars />}
+          {selectedButtonIndex === 3 && <Bookings />}
+
         </div>
       </div>
       <Footer />

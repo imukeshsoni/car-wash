@@ -8,6 +8,8 @@ const updateUserById = "http://localhost:8081/user/update/";
 const createOrder = "http://localhost:8082/order/create";
 const getOrderById = "http://localhost:8082/order/get/";
 const getAllOrders = "http://localhost:8082/order/get/all";
+const getAllPendingOrders = "http://localhost:8082/order/get/allpending";
+
 const updateOrderById = "http://localhost:8082/order/update/";
 const cancelOrderById = "http://localhost:8082/order/cancel/";
 const createServicePlan = "http://localhost:8082/service/create";
@@ -44,6 +46,7 @@ export {
   updateOrderById,
   cancelOrderById,
   getAllOrders,
+  getAllPendingOrders,
   createOrder,
   updateUserById,
 };
