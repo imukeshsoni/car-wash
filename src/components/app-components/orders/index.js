@@ -101,7 +101,7 @@ function Order() {
       .catch((err) => alert(err));
   };
 
-  if (!orders) {
+  if (!orders || orders.length < 1) {
     return <h2>You don't have any bookings!</h2>;
   }
   return (

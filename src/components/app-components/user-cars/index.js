@@ -139,12 +139,7 @@ const Cars = () => {
     );
   }
 
-  // const persistCars = JSON.parse(localStorage.getItem("cars"));
-
-  // if (!cars && persistCars != null) {
-  //   cars = persistCars;
-  // }
-  if (!cars) {
+  if (!cars || cars.length < 1) {
     return <h2>No cars found. Please add your cars. {addCarForm()}</h2>;
   }
   return (
