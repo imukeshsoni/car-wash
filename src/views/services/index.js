@@ -4,14 +4,13 @@ import "./styles.css";
 import { useSelector, useDispatch } from "react-redux";
 import { selectCars, setCars } from "../../redux/carSlice";
 import axios from "axios";
-import { createOrder } from "../../apis/urls";
+import { createOrder, getVehicleByCustomerId } from "../../apis/urls";
 import { useHistory } from "react-router";
 
 function Services() {
   const history = useHistory();
   const user = JSON.parse(localStorage.getItem("user"));
   const plans = JSON.parse(localStorage.getItem("plans"));
-  const persistCars = JSON.parse(localStorage.getItem("cars"));
 
   const [location, setlocation] = useState("");
   const [date, setdate] = useState("");
@@ -21,6 +20,8 @@ function Services() {
   const [paymentMode, setpaymentMode] = useState("cash");
   const [paymentStatus, setpaymentStatus] = useState("pending");
   const [amount, setamount] = useState(0);
+
+  const dispatch = useDispatch();
 
   const [errorMessage, seterrorMessage] = useState("");
 
@@ -58,12 +59,21 @@ function Services() {
       .catch((err) => alert(err));
   };
 
-  let cars = useSelector(selectCars);
-  const dispatch = useDispatch();
-
+  const cars = useSelector(selectCars);
   if (!cars) {
-    dispatch(setCars(persistCars));
+    axios
+      .get(getVehicleByCustomerId + user.email)
+      .then((res) => {
+        dispatch(setCars(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
   }
+
+
+
   if (!user) {
     return "Please log in as user";
   }

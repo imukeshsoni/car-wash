@@ -17,18 +17,25 @@ const Cars = () => {
   const [carNumber, setcarNumber] = useState("");
   const [carType, setcarType] = useState("");
 
-  const user = JSON.parse(localStorage.getItem("user"));
-  axios
-    .get(getVehicleByCustomerId + user.email)
-    .then((res) => {
-      dispatch(setCars(res.data));
-      localStorage.setItem("cars", JSON.stringify(res.data));
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-
   const dispatch = useDispatch();
+
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (!cars) {
+    axios
+      .get(getVehicleByCustomerId + user.email)
+      .then((res) => {
+        dispatch(setCars(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+  }
+
+
+
+
 
   const handleAddCar = (e) => {
     e.preventDefault();
@@ -47,6 +54,15 @@ const Cars = () => {
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
 
+    axios
+      .get(getVehicleByCustomerId + user.email)
+      .then((res) => {
+        dispatch(setCars(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     setcarName("");
     setcarBrand("");
     setcarYear("");
@@ -61,6 +77,15 @@ const Cars = () => {
         console.log(res);
       })
       .catch((err) => console.log(err));
+
+    axios
+      .get(getVehicleByCustomerId + user.email)
+      .then((res) => {
+        dispatch(setCars(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   function addCarForm() {
@@ -114,11 +139,11 @@ const Cars = () => {
     );
   }
 
-  const persistCars = JSON.parse(localStorage.getItem("cars"));
+  // const persistCars = JSON.parse(localStorage.getItem("cars"));
 
-  if (!cars && persistCars != null) {
-    cars = persistCars;
-  }
+  // if (!cars && persistCars != null) {
+  //   cars = persistCars;
+  // }
   if (!cars) {
     return <h2>No cars found. Please add your cars. {addCarForm()}</h2>;
   }

@@ -12,7 +12,7 @@ import {
 } from "../../../apis/urls";
 
 function Order() {
-  let orders = useSelector(selectOrders);
+  const orders = useSelector(selectOrders);
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("user"));
   const [column, setColumn] = useState(true);
@@ -27,33 +27,25 @@ function Order() {
 
   window.addEventListener("resize", showColumn);
 
-  if (user.role === "ROLE_WASHER") {
+  if (!orders && user.role === "ROLE_WASHER") {
     axios
       .get(getWasherOrdersById + user.email)
       .then((res) => {
         dispatch(setOrders(res.data));
-        localStorage.setItem("orders", JSON.stringify(res.data));
       })
       .catch((err) => alert(err));
 
-    if (!orders) {
-      orders = JSON.parse(localStorage.getItem("orders"));
-    }
-  } else if (user.role === "ROLE_USER") {
+  } else if (!orders && user.role === "ROLE_USER") {
     axios
       .get(getCustomerOrdersById + user.email)
       .then((res) => {
         dispatch(setOrders(res.data));
-        localStorage.setItem("orders", JSON.stringify(res.data));
       })
       .catch((err) => alert(err));
-
-    if (!orders) {
-      orders = JSON.parse(localStorage.getItem("orders"));
-    }
   }
 
   const handleCancel = (i) => {
+    debugger;
     let filterOrder = orders.filter((value, index) => {
       return value.id === i;
     });
@@ -63,9 +55,17 @@ function Order() {
         console.log(res);
       })
       .catch((err) => console.log(err));
+
+    axios
+      .get(getCustomerOrdersById + user.email)
+      .then((res) => {
+        dispatch(setOrders(res.data));
+      })
+      .catch((err) => alert(err));
   };
 
   const handleComplete = (i) => {
+    debugger;
     let filterBooking = orders.filter((value, index) => {
       return value.id === i;
     });
@@ -92,23 +92,16 @@ function Order() {
       })
       .catch((err) => console.log(err));
 
+
     axios
       .get(getWasherOrdersById + user.email)
       .then((res) => {
         dispatch(setOrders(res.data));
-        localStorage.setItem("bookings", JSON.stringify(res.data));
       })
-      .catch((err) => {
-        console.log(err);
-        alert(err);
-      });
+      .catch((err) => alert(err));
   };
 
   if (!orders) {
-    orders = JSON.parse(localStorage.getItem("orders"));
-  }
-
-  if (orders.length < 1) {
     return <h2>You don't have any bookings!</h2>;
   }
   return (
