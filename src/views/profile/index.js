@@ -13,10 +13,7 @@ import Bookings from "../../components/app-components/bookings/index.js";
 
 import axios from "axios";
 
-import {
-  getCustomerOrdersById,
-  getWasherOrdersById,
-} from "../../apis/urls.js";
+import { getCustomerOrdersById, getWasherOrdersById } from "../../apis/urls.js";
 
 function Profile() {
   const dispatch = useDispatch();
@@ -40,9 +37,7 @@ function Profile() {
       .catch((err) => alert(err));
   }
 
-
   const [selectedButtonIndex, setselectedButtonIndex] = useState(0);
-
 
   if (!user) {
     return "please Log In";
@@ -59,18 +54,35 @@ function Profile() {
             Your Profile
           </button>
 
-          <button className="menu--button" onClick={() => setselectedButtonIndex(1)}>
+          <button
+            className="menu--button"
+            onClick={() => setselectedButtonIndex(1)}
+          >
             Your Bookings
           </button>
 
           {user.role === "ROLE_USER" && (
-            <button className="menu--button" onClick={() => setselectedButtonIndex(2)}>
+            <button
+              className="menu--button"
+              onClick={() => setselectedButtonIndex(2)}
+            >
               Your Cars
             </button>
           )}
           {user.role !== "ROLE_USER" && (
-            <button className="menu--button" onClick={() => setselectedButtonIndex(3)}>
+            <button
+              className="menu--button"
+              onClick={() => setselectedButtonIndex(3)}
+            >
               Available Bookings
+            </button>
+          )}
+          {user.role === "ROLE_ADMIN" && (
+            <button
+              className="menu--button"
+              onClick={() => setselectedButtonIndex(4)}
+            >
+              Manage Users
             </button>
           )}
         </span>
@@ -79,7 +91,6 @@ function Profile() {
           {selectedButtonIndex === 1 && <Order />}
           {selectedButtonIndex === 2 && <Cars />}
           {selectedButtonIndex === 3 && <Bookings />}
-
         </div>
       </div>
       <Footer />
