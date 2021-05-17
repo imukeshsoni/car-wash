@@ -8,17 +8,19 @@ import { login } from "../../redux/userSlice";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
+import { getUserById } from "../../apis/urls";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [correctCredentials, setcorrectCredentials] = useState(true);
+  const [userWarning, setuserWarning] = useState(true);
   const [userSignUp, setuserSignUp] = useState(false);
 
   const history = useHistory();
 
   const dispatch = useDispatch();
 
-  // Set user state in redux with details received from backend
+  // Set user state in redux with data received from backend
   const setUser = (res) => {
     const userData = {
       name: res.data.name,
@@ -43,13 +45,14 @@ const Login = () => {
     e.preventDefault();
 
     axios
-      .get("http://localhost:8081/user/get/" + email)
+      .get(getUserById + email)
       .then((res) => {
         if (res.data.password === sha512(password)) {
-          setUser(res);
-          setcorrectCredentials(true);
+          res.data.status ?
+            setUser(res)
+            : setuserWarning("User is not acitve yet.");
         } else {
-          setcorrectCredentials(false);
+          setuserWarning("Invalid credentials");
         }
       })
       .catch((err) => {
@@ -64,7 +67,7 @@ const Login = () => {
       <div className="login">
         <div className="login--page">
           <form onSubmit={(e) => handleSubmit(e)}>
-            <h1>Login here 🚪</h1>
+            <h1>Log In</h1>
             <input
               type="email"
               value={email}
@@ -80,8 +83,8 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            {correctCredentials === false && (
-              <p className="warning">Invalid email or password!</p>
+            {userWarning && (
+              <p className="warning">{userWarning}</p>
             )}
 
             <button type="submit" className="submit__btn">

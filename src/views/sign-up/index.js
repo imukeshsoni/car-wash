@@ -4,13 +4,16 @@ import Login from "../login/index.js";
 import axios from "axios";
 import { sha512 } from 'js-sha512';
 
+import { getUserById, createUser } from "../../apis/urls";
+
 function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const [phone, setPhone] = useState(0);
+  const [phone, setPhone] = useState("");
   const [userRole, setuserRole] = useState("ROLE_USER");
+  const [userStatus, setuserStatus] = useState(false)
   const [userLogin, setuserLogin] = useState(false);
   const [userExists, setuserExists] = useState(false);
 
@@ -19,7 +22,7 @@ function Signup() {
   const handleSignup = (e) => {
     e.preventDefault();
     axios
-      .get("http://localhost:8081/user/get/" + email)
+      .get(getUserById + email)
       .then(res => {
         debugger;
         if (res.data !== "") {
@@ -40,17 +43,25 @@ function Signup() {
       rating: 0,
       role: userRole,
       username: username,
+      status: userStatus
     }
 
     axios
-      .post("http://localhost:8081/user/create", userData)
+      .post(createUser, userData)
       .then((res) => {
-        alert("Sign Up success!");
+        alert("Sign Up success! Please wait until user is verified.");
+
 
       })
       .catch((err) => {
 
       });
+    setName("");
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setPhone("");
+    setuserLogin(true);
   }
 
   //Render Login page if login button clicked else signup page
@@ -62,41 +73,50 @@ function Signup() {
         <div className="signup--page">
           <form onSubmit={(e) => handleSignup(e)}>
             <h1>Sign Up Here</h1>
+            <div className="basic--details">
+              <input
+                type="text"
+                value={name}
+                placeholder="Enter your Name"
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+
+              <input
+                type="text"
+                value={username}
+                placeholder="Enter your Nick Name"
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </div>
+            <div className="basic--details">
+              <input
+                type="email"
+                value={email}
+                placeholder="Enter your Email"
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <input
+                type="password"
+                value={password}
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+
+
+            </div>
             <input
-              type="text"
-              value={name}
-              placeholder="Enter your Name"
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-            <input
-              type="email"
-              value={email}
-              placeholder="Enter your Email"
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <input
-              type="password"
-              value={password}
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <input
-              type="text"
-              value={username}
-              placeholder="Enter your Nick Name"
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-            <input
-              type="number"
+              type="tel"
+              pattern="[0-9]{10}"
               value={phone}
               placeholder="Enter your Phone Number"
               onChange={(e) => setPhone(e.target.value)}
               required
             />
+
             <div className="user--roles">
               <input
                 className="radio--btn"

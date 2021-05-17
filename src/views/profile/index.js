@@ -2,67 +2,43 @@ import React, { useState } from "react";
 import "./styles.css";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setCars } from "../../redux/carSlice";
+
 import { setOrders, selectOrders } from "../../redux/orderSlice";
 
 import Order from "../../components/app-components/orders/index.js";
 import UserProfile from "../../components/app-components/user-profile/index.js";
 import Cars from "../../components/app-components/user-cars/index.js";
 import Footer from "../../components/app-components/footer/index.js";
+import Bookings from "../../components/app-components/bookings/index.js";
+import ManageUser from "../../components/app-components/manage-user/index.js";
 
 import axios from "axios";
 
-import {
-  getVehicleByCustomerId,
-  getCustomerOrdersById,
-  getWasherOrdersById,
-} from "../../apis/urls.js";
+import { getCustomerOrdersById, getWasherOrdersById } from "../../apis/urls.js";
 
 function Profile() {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("user"));
-  let orders = useSelector(selectOrders);
+  const orders = useSelector(selectOrders);
 
-  if (!orders) {
-    orders = JSON.parse(localStorage.getItem("orders"));
+  //if order is null, only then order dispatched
+  if (!orders && user.role === "ROLE_USER") {
+    axios
+      .get(getCustomerOrdersById + user.email)
+      .then((res) => {
+        dispatch(setOrders(res.data));
+      })
+      .catch((err) => alert(err));
+  } else if (!orders && user.ROLE === "ROLE_WASHER") {
+    axios
+      .get(getWasherOrdersById + user.email)
+      .then((res) => {
+        dispatch(setOrders(res.data));
+      })
+      .catch((err) => alert(err));
   }
 
   const [selectedButtonIndex, setselectedButtonIndex] = useState(0);
-
-  const handleCars = () => {
-    setselectedButtonIndex(2);
-    axios
-      .get(getVehicleByCustomerId + user.email)
-      .then((res) => {
-        dispatch(setCars(res.data));
-        localStorage.setItem("cars", JSON.stringify(res.data));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const handleOrders = () => {
-    setselectedButtonIndex(1);
-
-    if (user.role === "ROLE_USER") {
-      axios
-        .get(getCustomerOrdersById + user.email)
-        .then((res) => {
-          dispatch(setOrders(res.data));
-          localStorage.setItem("orders", JSON.stringify(res.data));
-        })
-        .catch((err) => alert(err));
-    } else if (user.ROLE === "ROLE_WASHER") {
-      axios
-        .get(getWasherOrdersById + user.email)
-        .then((res) => {
-          dispatch(setOrders(res.data));
-          localStorage.setItem("orders", JSON.stringify(res.data));
-        })
-        .catch((err) => alert(err));
-    }
-  };
 
   if (!user) {
     return "please Log In";
@@ -79,13 +55,37 @@ function Profile() {
             Your Profile
           </button>
 
-          <button className="menu--button" onClick={handleOrders}>
-            Your Bookings
-          </button>
+          {user.role !== "ROLE_ADMIN" && (
+            <button
+              className="menu--button"
+              onClick={() => setselectedButtonIndex(1)}
+            >
+              Your Bookings
+            </button>
+          )}
 
           {user.role === "ROLE_USER" && (
-            <button className="menu--button" onClick={handleCars}>
+            <button
+              className="menu--button"
+              onClick={() => setselectedButtonIndex(2)}
+            >
               Your Cars
+            </button>
+          )}
+          {user.role !== "ROLE_USER" && (
+            <button
+              className="menu--button"
+              onClick={() => setselectedButtonIndex(3)}
+            >
+              Available Bookings
+            </button>
+          )}
+          {user.role === "ROLE_ADMIN" && (
+            <button
+              className="menu--button"
+              onClick={() => setselectedButtonIndex(4)}
+            >
+              Manage Users
             </button>
           )}
         </span>
@@ -93,6 +93,8 @@ function Profile() {
           {selectedButtonIndex === 0 && <UserProfile />}
           {selectedButtonIndex === 1 && <Order />}
           {selectedButtonIndex === 2 && <Cars />}
+          {selectedButtonIndex === 3 && <Bookings />}
+          {selectedButtonIndex === 4 && <ManageUser />}
         </div>
       </div>
       <Footer />

@@ -1,73 +1,73 @@
 .login {
-display: flex;
-flex-direction: column;
-
-align-items: center;
-}
-
-
-.login--page{
-	margin-top: 20px;
-	height: 560px;
-	width: 500px;
-	background-color: #242424;
 	display: flex;
 	flex-direction: column;
-	border-radius: 10px;
-}
-.login--page form{
-	margin-top: 100px;
-	display: flex;
-	flex-direction: column;
+
 	align-items: center;
-}
-.login--page form h1{
-	color: #fff;
-	margin: 10px;
-
-}
-.sign--up--btn{
-	margin-top: 10px;
-	height: 40px;
-	background-color: #242424;
-	color:#fff;
-	border: 1px solid #fff;
-	cursor: pointer;
-	border-radius: 5px;
-	padding :8px;
-}
-.warning{
-	color:red;
-	font-family: sans-serif;
-}
-
-.submit__btn{
-	margin-top: 10px;
-	height: 40px;
-	width: 80px;
-	background-color: #242424;
-	color:#fff;
-	border: 1px solid #fff;
-	cursor: pointer;
-	border-radius: 5px;
-}
-.submit__btn:hover{
-	background-color: #fff;
-	color:#242424;
-	transition: all 0.3s ease-out;
-
-}
-
- @media screen and (max-width:720px) {
-	.login--page{
-		width: 350px;
 	}
 
- }
- @media screen and (max-width:800px) {
 
 	.login--page{
-		width: 400px;
+		margin-top: 20px;
+		height: 560px;
+		width: 500px;
+		background-color: #242424;
+		display: flex;
+		flex-direction: column;
+		border-radius: 10px;
+	}
+	.login--page form{
+		margin-top: 100px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.login--page form h1{
+		color: #fff;
+		margin: 10px;
+
+	}
+	.sign--up--btn{
+		margin-top: 10px;
+		height: 40px;
+		background-color: #242424;
+		color:#fff;
+		border: 1px solid #fff;
+		cursor: pointer;
+		border-radius: 5px;
+		padding :8px;
+	}
+	.warning{
+		color:red;
+		font-family: sans-serif;
 	}
 
- }
+	.submit__btn{
+		margin-top: 10px;
+		height: 40px;
+		width: 80px;
+		background-color: #242424;
+		color:#fff;
+		border: 1px solid #fff;
+		cursor: pointer;
+		border-radius: 5px;
+	}
+	.submit__btn:hover{
+		background-color: #fff;
+		color:#242424;
+		transition: all 0.3s ease-out;
+
+	}
+
+	 @media screen and (max-width:720px) {
+		.login--page{
+			width: 350px;
+		}
+
+	 }
+	 @media screen and (max-width:800px) {
+
+		.login--page{
+			width: 400px;
+		}
+
+	 }

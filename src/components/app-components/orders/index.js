@@ -12,57 +12,40 @@ import {
 } from "../../../apis/urls";
 
 function Order() {
-  let orders = useSelector(selectOrders);
+  const orders = useSelector(selectOrders);
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("user"));
-  const [column, setColumn] = useState(true);
 
-  const showColumn = () => {
-    if (window.innerWidth <= 960) {
-      setColumn(false);
-    } else {
-      setColumn(true);
+  const loadOrders = () => {
+    if (!orders && user.role === "ROLE_WASHER") {
+      axios
+        .get(getWasherOrdersById + user.email)
+        .then((res) => {
+          dispatch(setOrders(res.data));
+        })
+        .catch((err) => alert(err));
+    } else if (!orders && user.role === "ROLE_USER") {
+      axios
+        .get(getCustomerOrdersById + user.email)
+        .then((res) => {
+          dispatch(setOrders(res.data));
+        })
+        .catch((err) => alert(err));
     }
   };
-
-  window.addEventListener("resize", showColumn);
-
-  if (user.role === "ROLE_WASHER") {
-    axios
-      .get(getWasherOrdersById + user.email)
-      .then((res) => {
-        dispatch(setOrders(res.data));
-        localStorage.setItem("orders", JSON.stringify(res.data));
-      })
-      .catch((err) => alert(err));
-
-    if (!orders) {
-      orders = JSON.parse(localStorage.getItem("orders"));
-    }
-  } else if (user.role === "ROLE_USER") {
-    axios
-      .get(getCustomerOrdersById + user.email)
-      .then((res) => {
-        dispatch(setOrders(res.data));
-        localStorage.setItem("orders", JSON.stringify(res.data));
-      })
-      .catch((err) => alert(err));
-
-    if (!orders) {
-      orders = JSON.parse(localStorage.getItem("orders"));
-    }
-  }
+  loadOrders();
 
   const handleCancel = (i) => {
+    debugger;
     let filterOrder = orders.filter((value, index) => {
       return value.id === i;
     });
     axios
       .put(cancelOrderById + i, filterOrder[0])
-      .then((res) => {
-        console.log(res);
-      })
+      .then((res) => {})
       .catch((err) => console.log(err));
+
+    loadOrders();
   };
 
   const handleComplete = (i) => {
@@ -87,28 +70,12 @@ function Order() {
 
     axios
       .put(updateOrderById + i, updatedBooking)
-      .then((res) => {
-        console.log(res);
-      })
+      .then((res) => {})
       .catch((err) => console.log(err));
-
-    axios
-      .get(getWasherOrdersById + user.email)
-      .then((res) => {
-        dispatch(setOrders(res.data));
-        localStorage.setItem("bookings", JSON.stringify(res.data));
-      })
-      .catch((err) => {
-        console.log(err);
-        alert(err);
-      });
+    loadOrders();
   };
 
-  if (!orders) {
-    orders = JSON.parse(localStorage.getItem("orders"));
-  }
-
-  if (orders.length < 1) {
+  if (!orders || orders.length < 1) {
     return <h2>You don't have any bookings!</h2>;
   }
   return (
@@ -116,15 +83,14 @@ function Order() {
       <h2>Your Bookings</h2>
       <table>
         <thead className="order--table--heading">
-          {column && <th>Order Id</th>}
-
+          <th>Order Id</th>
           <th>Date</th>
           <th>Time</th>
-          {column && <th>Address</th>}
-          {column && <th>Order Status</th>}
-          {column && <th>Payment Mode</th>}
+          <th>Address</th>
+          <th>Order Status</th>
+          <th>Payment Mode</th>
           <th>Payment Status</th>
-          {column && <th>Service Plan</th>}
+          <th>Service Plan</th>
 
           <th>Vehicle</th>
           <th>Amount</th>
@@ -135,17 +101,17 @@ function Order() {
           {orders.map((value, i) => {
             return (
               <tr className="order--table--row" key={i}>
-                {column && <td>{value.id}</td>}
+                <td>{value.id}</td>
 
                 <td>{value.date}</td>
                 <td>{value.time}</td>
-                {column && <td>{value.location}</td>}
+                <td>{value.location}</td>
 
-                {column && <td>{value.orderStatus}</td>}
+                <td>{value.orderStatus}</td>
 
-                {column && <td>{value.paymentMode}</td>}
+                <td>{value.paymentMode}</td>
                 <td>{value.paymentStatus}</td>
-                {column && <td>{value.servicePlan}</td>}
+                <td>{value.servicePlan}</td>
 
                 <td>{value.vehicleId}</td>
                 <td>{value.orderAmount}</td>
@@ -160,16 +126,17 @@ function Order() {
                     </button>
                   </td>
                 )}
-                {user.role === "ROLE_WASHER" && value.orderStatus === "pending" && (
-                  <td>
-                    <button
-                      className="cancel--btn"
-                      onClick={() => handleComplete(value.id)}
-                    >
-                      Complete
-                    </button>
-                  </td>
-                )}
+                {user.role === "ROLE_WASHER" &&
+                  value.orderStatus === "pending" && (
+                    <td>
+                      <button
+                        className="cancel--btn"
+                        onClick={() => handleComplete(value.id)}
+                      >
+                        Complete
+                      </button>
+                    </td>
+                  )}
               </tr>
             );
           })}

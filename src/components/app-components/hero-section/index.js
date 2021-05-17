@@ -9,6 +9,7 @@ export function HeroSection() {
       <p>Grab exclusive deals</p>
       <div className="hero-btns">
         <Button
+          linkTo="/services"
           className="btns"
           buttonStyle="btn--outline"
           buttonSize="btn--large"
