@@ -10,6 +10,7 @@ import UserProfile from "../../components/app-components/user-profile/index.js";
 import Cars from "../../components/app-components/user-cars/index.js";
 import Footer from "../../components/app-components/footer/index.js";
 import Bookings from "../../components/app-components/bookings/index.js";
+import ManageUser from "../../components/app-components/manage-user/index.js";
 
 import axios from "axios";
 
@@ -54,12 +55,14 @@ function Profile() {
             Your Profile
           </button>
 
-          <button
-            className="menu--button"
-            onClick={() => setselectedButtonIndex(1)}
-          >
-            Your Bookings
-          </button>
+          {user.role !== "ROLE_ADMIN" && (
+            <button
+              className="menu--button"
+              onClick={() => setselectedButtonIndex(1)}
+            >
+              Your Bookings
+            </button>
+          )}
 
           {user.role === "ROLE_USER" && (
             <button
@@ -91,6 +94,7 @@ function Profile() {
           {selectedButtonIndex === 1 && <Order />}
           {selectedButtonIndex === 2 && <Cars />}
           {selectedButtonIndex === 3 && <Bookings />}
+          {selectedButtonIndex === 4 && <ManageUser />}
         </div>
       </div>
       <Footer />
