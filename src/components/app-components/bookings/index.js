@@ -77,7 +77,7 @@ function Bookings() {
 
 	}
 
-	if (bookings.length < 1) {
+	if (!bookings) {
 		return <h2>Currently No Bookings are Available!</h2>
 	}
 	return (

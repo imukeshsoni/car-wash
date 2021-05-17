@@ -144,7 +144,7 @@ const Cars = () => {
   }
   return (
     <div>
-      <table className="table">
+      <table className="car--table">
         <thead>
           <th className="table--heading">Car Brand</th>
           <th className="table--heading">Car Model</th>

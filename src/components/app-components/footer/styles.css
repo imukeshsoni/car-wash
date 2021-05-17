@@ -19,12 +19,12 @@
 
 }
 .footer--items{
-	align-items: center;
 	color: ivory;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-evenly;
 	list-style-type: none;
 	padding: 20px 30px 20px 30px;
+	border : 1px solid #fff ;
 }
 
 .href{

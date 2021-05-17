@@ -1,31 +1,15 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "./styles.css";
 import Input from "../../base-components/input";
 import axios from "axios";
 
-export class Footer extends Component {
-  constructor() {
-    super();
-    this.state = {
-      email: {},
-    };
+export function Footer() {
+  const [email, setEmail] = useState("")
 
-    this.changeHandler = this.changeHandler.bind(this);
-    this.subscribeHandler = this.subscribeHandler.bind(this);
-  }
-
-  changeHandler = (event) => {
-    let email = this.state.email;
-    email[event.target.name] = event.target.value;
-    this.setState({
-      email,
-    });
-  };
-
-  subscribeHandler = (event) => {
+  const subscribeHandler = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost:8081/subscribe", this.state.email)
+      .post("http://localhost:8081/subscribe", email)
       .then((res) => {
         if (res.status === 200) {
           alert(
@@ -35,22 +19,46 @@ export class Footer extends Component {
       })
       .catch((err) => {
         console.log(err);
+        alert("Something went wrong!");
 
-        if (err.status !== 200) {
-          alert("Something went wrong!");
-        }
       });
   };
 
-  render() {
-    return (
-      <div className="footer--conatiner">
-        <h3 className="footer--heading">
-          {" "}
-          <i className="fas fa-wind" />WASHIVO
+  return (
+    <div className="footer--conatiner">
+      <h3 className="footer--heading">
+
+        <i className="fas fa-wind" />WASHIVO
         </h3>
 
-        <form onSubmit={this.subscribeHandler} className="footer--heading">
+      <div className='footer--items'>
+        <div className="contact">
+
+          <h3>Contact us - (Head Branch) </h3>
+          <br />
+          <p>(502) 241-9016 <br />
+          1927 N Glassell St <br />
+          Orange, California(CA), 92865</p>
+        </div>
+        <div className="contact">
+          <h3>Contact us</h3>
+
+          <br />
+          <p>(503) 692-3834<br />
+          2100 W Commonwealth Ave<br />
+          Fullerton, California(CA), 92833</p>
+        </div>
+
+        <div className="contact">
+          <h3>Become a partner</h3>
+          <br />
+          <p>(502) 241-9016 <br />
+          (502) 241-9016 <br />
+          (503) 229-7240</p>
+        </div>
+        <form onSubmit={subscribeHandler} className="">
+
+
           <h2>Subscribe to our newsletters and offers</h2>
 
           <Input
@@ -58,14 +66,15 @@ export class Footer extends Component {
             Name="email"
             MinLength="6"
             MaxLength="32"
-            OnChange={this.changeHandler}
+            OnChange={(e) => setEmail(e.target.value)}
           />
           <Input Type="submit" Value="Subscribe" />
         </form>
-      </div>
-    );
-  }
-  1;
-}
 
+      </div>
+
+    </div>
+  );
+
+}
 export default Footer;

@@ -69,10 +69,7 @@ function Services() {
       .catch((err) => {
         console.log(err);
       });
-
   }
-
-
 
   if (!user) {
     return "Please log in as user";
@@ -204,7 +201,6 @@ function Services() {
           <p className="warning">{errorMessage}</p>
         </div>
       </div>
-
       <Footer />
     </div>
   );

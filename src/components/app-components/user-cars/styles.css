@@ -1,4 +1,6 @@
-
+.car--table{
+	width: 100%;
+}
 .table--heading{
 	height: 40px;
 	color:#fff;
@@ -27,13 +29,17 @@
 	background-color: #fff;
 	color: #242424;
 }
+.car--form{
+	width: 120%;
+}
+
+
 .car--details{
 	padding-left: 5px;
 	margin: 0 0 10px 0;
 	width: 200px;
 	margin-top: 10px;
-	display: flex;
-
+	align-items: center;
 }
 .submit--btn{
 	padding: 0;
@@ -43,4 +49,11 @@
 	cursor: pointer;
 	border: 1px solid #fff;
 	background-color: #242424;
+}
+@media screen and (max-width: 1160px) {
+	.car--table{
+		width: 100%;
+	}
+
+
 }

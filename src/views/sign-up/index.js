@@ -49,12 +49,19 @@ function Signup() {
     axios
       .post(createUser, userData)
       .then((res) => {
-        alert("Sign Up success!");
+        alert("Sign Up success! Please wait until user is verified.");
+
 
       })
       .catch((err) => {
 
       });
+    setName("");
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setPhone("");
+    setuserLogin(true);
   }
 
   //Render Login page if login button clicked else signup page

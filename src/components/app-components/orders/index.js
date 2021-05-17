@@ -15,17 +15,7 @@ function Order() {
   const orders = useSelector(selectOrders);
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("user"));
-  const [column, setColumn] = useState(true);
 
-  const showColumn = () => {
-    if (window.innerWidth <= 960) {
-      setColumn(false);
-    } else {
-      setColumn(true);
-    }
-  };
-
-  window.addEventListener("resize", showColumn);
 
   if (!orders && user.role === "ROLE_WASHER") {
     axios
@@ -109,15 +99,15 @@ function Order() {
       <h2>Your Bookings</h2>
       <table>
         <thead className="order--table--heading">
-          {column && <th>Order Id</th>}
+          <th>Order Id</th>
 
           <th>Date</th>
           <th>Time</th>
-          {column && <th>Address</th>}
-          {column && <th>Order Status</th>}
-          {column && <th>Payment Mode</th>}
+          <th>Address</th>
+          <th>Order Status</th>
+          <th>Payment Mode</th>
           <th>Payment Status</th>
-          {column && <th>Service Plan</th>}
+          <th>Service Plan</th>
 
           <th>Vehicle</th>
           <th>Amount</th>
@@ -128,17 +118,17 @@ function Order() {
           {orders.map((value, i) => {
             return (
               <tr className="order--table--row" key={i}>
-                {column && <td>{value.id}</td>}
+                <td>{value.id}</td>
 
                 <td>{value.date}</td>
                 <td>{value.time}</td>
-                {column && <td>{value.location}</td>}
+                <td>{value.location}</td>
 
-                {column && <td>{value.orderStatus}</td>}
+                <td>{value.orderStatus}</td>
 
-                {column && <td>{value.paymentMode}</td>}
+                <td>{value.paymentMode}</td>
                 <td>{value.paymentStatus}</td>
-                {column && <td>{value.servicePlan}</td>}
+                <td>{value.servicePlan}</td>
 
                 <td>{value.vehicleId}</td>
                 <td>{value.orderAmount}</td>
