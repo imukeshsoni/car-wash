@@ -16,23 +16,24 @@ function Order() {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("user"));
 
-
-  if (!orders && user.role === "ROLE_WASHER") {
-    axios
-      .get(getWasherOrdersById + user.email)
-      .then((res) => {
-        dispatch(setOrders(res.data));
-      })
-      .catch((err) => alert(err));
-
-  } else if (!orders && user.role === "ROLE_USER") {
-    axios
-      .get(getCustomerOrdersById + user.email)
-      .then((res) => {
-        dispatch(setOrders(res.data));
-      })
-      .catch((err) => alert(err));
-  }
+  const loadOrders = () => {
+    if (!orders && user.role === "ROLE_WASHER") {
+      axios
+        .get(getWasherOrdersById + user.email)
+        .then((res) => {
+          dispatch(setOrders(res.data));
+        })
+        .catch((err) => alert(err));
+    } else if (!orders && user.role === "ROLE_USER") {
+      axios
+        .get(getCustomerOrdersById + user.email)
+        .then((res) => {
+          dispatch(setOrders(res.data));
+        })
+        .catch((err) => alert(err));
+    }
+  };
+  loadOrders();
 
   const handleCancel = (i) => {
     debugger;
@@ -41,21 +42,13 @@ function Order() {
     });
     axios
       .put(cancelOrderById + i, filterOrder[0])
-      .then((res) => {
-        console.log(res);
-      })
+      .then((res) => {})
       .catch((err) => console.log(err));
 
-    axios
-      .get(getCustomerOrdersById + user.email)
-      .then((res) => {
-        dispatch(setOrders(res.data));
-      })
-      .catch((err) => alert(err));
+    loadOrders();
   };
 
   const handleComplete = (i) => {
-    debugger;
     let filterBooking = orders.filter((value, index) => {
       return value.id === i;
     });
@@ -77,18 +70,9 @@ function Order() {
 
     axios
       .put(updateOrderById + i, updatedBooking)
-      .then((res) => {
-        console.log(res);
-      })
+      .then((res) => {})
       .catch((err) => console.log(err));
-
-
-    axios
-      .get(getWasherOrdersById + user.email)
-      .then((res) => {
-        dispatch(setOrders(res.data));
-      })
-      .catch((err) => alert(err));
+    loadOrders();
   };
 
   if (!orders || orders.length < 1) {
@@ -100,7 +84,6 @@ function Order() {
       <table>
         <thead className="order--table--heading">
           <th>Order Id</th>
-
           <th>Date</th>
           <th>Time</th>
           <th>Address</th>
@@ -143,16 +126,17 @@ function Order() {
                     </button>
                   </td>
                 )}
-                {user.role === "ROLE_WASHER" && value.orderStatus === "pending" && (
-                  <td>
-                    <button
-                      className="cancel--btn"
-                      onClick={() => handleComplete(value.id)}
-                    >
-                      Complete
-                    </button>
-                  </td>
-                )}
+                {user.role === "ROLE_WASHER" &&
+                  value.orderStatus === "pending" && (
+                    <td>
+                      <button
+                        className="cancel--btn"
+                        onClick={() => handleComplete(value.id)}
+                      >
+                        Complete
+                      </button>
+                    </td>
+                  )}
               </tr>
             );
           })}

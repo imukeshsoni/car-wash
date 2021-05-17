@@ -10,7 +10,7 @@ import {
 } from "../../../apis/urls";
 
 const Cars = () => {
-  let cars = useSelector(selectCars);
+  const cars = useSelector(selectCars);
   const [carName, setcarName] = useState("");
   const [carBrand, setcarBrand] = useState("");
   const [carYear, setcarYear] = useState("");
@@ -21,7 +21,7 @@ const Cars = () => {
 
   const user = JSON.parse(localStorage.getItem("user"));
 
-  if (!cars) {
+  const loadCars = () => {
     axios
       .get(getVehicleByCustomerId + user.email)
       .then((res) => {
@@ -30,12 +30,11 @@ const Cars = () => {
       .catch((err) => {
         console.log(err);
       });
+  };
 
+  if (!cars) {
+    loadCars();
   }
-
-
-
-
 
   const handleAddCar = (e) => {
     e.preventDefault();
@@ -51,17 +50,8 @@ const Cars = () => {
 
     axios
       .post(createVehicle, newCar)
-      .then((res) => console.log(res))
+      .then((res) => loadCars())
       .catch((err) => console.log(err));
-
-    axios
-      .get(getVehicleByCustomerId + user.email)
-      .then((res) => {
-        dispatch(setCars(res.data));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
 
     setcarName("");
     setcarBrand("");
@@ -74,18 +64,9 @@ const Cars = () => {
     axios
       .delete(deleteVehicleById + carId)
       .then((res) => {
-        console.log(res);
+        loadCars();
       })
       .catch((err) => console.log(err));
-
-    axios
-      .get(getVehicleByCustomerId + user.email)
-      .then((res) => {
-        dispatch(setCars(res.data));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
 
   function addCarForm() {
