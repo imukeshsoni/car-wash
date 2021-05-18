@@ -6,6 +6,7 @@ import { selectCars, setCars } from "../../redux/carSlice";
 import axios from "axios";
 import { createOrder, getVehicleByCustomerId } from "../../apis/urls";
 import { useHistory } from "react-router";
+import LoggedInError from "../error/loggedIn.js";
 
 function Services() {
   const history = useHistory();
@@ -21,9 +22,14 @@ function Services() {
   const [paymentStatus, setpaymentStatus] = useState("pending");
   const [amount, setamount] = useState(0);
 
+  const cars = useSelector(selectCars);
+
   const dispatch = useDispatch();
 
   const [errorMessage, seterrorMessage] = useState("");
+  if (!user) {
+    return <LoggedInError />;
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -59,7 +65,6 @@ function Services() {
       .catch((err) => alert(err));
   };
 
-  const cars = useSelector(selectCars);
   if (!cars) {
     axios
       .get(getVehicleByCustomerId + user.email)
@@ -71,9 +76,6 @@ function Services() {
       });
   }
 
-  if (!user) {
-    return "Please log in as user";
-  }
   return (
     <div>
       <div className="service--container">
@@ -126,7 +128,9 @@ function Services() {
                   setvehicleId(e.target.value);
                 }}
               >
-                <option selected>Please Select Your Car</option>
+                <option selected value="">
+                  Please Select Your Car
+                </option>
                 {cars &&
                   cars.map((value, i) => {
                     return (
@@ -149,7 +153,7 @@ function Services() {
                 id="service"
                 onChange={(e) => {
                   const filterPlan = plans.filter((t, i) => {
-                    return t.serviceId === e.target.value;
+                    return t.serviceId == e.target.value;
                   });
                   if (filterPlan.length > 0) {
                     const selectedPlan = filterPlan[0];
@@ -184,15 +188,13 @@ function Services() {
                 </option>
                 <option value="online">Online</option>
               </select>
-
               <br />
-
-              <button type="submit" name="submit">
+              <button className="custom--margin" type="submit" name="submit">
                 Book Wash
               </button>
-              <label>
+              <label className="custom--margin">
                 Amount:{" "}
-                {servicePlanName === "notSelected"
+                {servicePlanName == "notSelected"
                   ? "Please Select Plan"
                   : amount}
               </label>

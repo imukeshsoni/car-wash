@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "./styles.css";
 import Login from "../login/index.js";
+
+import image from "../../assets/images/car-wash-logo-2.png";
 import axios from "axios";
-import { sha512 } from 'js-sha512';
+import { sha512 } from "js-sha512";
 
 import { getUserById, createUser } from "../../apis/urls";
 
@@ -13,28 +15,23 @@ function Signup() {
   const [username, setUsername] = useState("");
   const [phone, setPhone] = useState("");
   const [userRole, setuserRole] = useState("ROLE_USER");
-  const [userStatus, setuserStatus] = useState(false)
+  const [userStatus, setuserStatus] = useState(false);
   const [userLogin, setuserLogin] = useState(false);
   const [userExists, setuserExists] = useState(false);
 
-
-
   const handleSignup = (e) => {
     e.preventDefault();
-    axios
-      .get(getUserById + email)
-      .then(res => {
-        debugger;
-        if (res.data !== "") {
-          setuserExists(true);
-        } else {
-          registerUser();
-        }
-      })
+    axios.get(getUserById + email).then((res) => {
+      debugger;
+      if (res.data !== "") {
+        setuserExists(true);
+      } else {
+        registerUser();
+      }
+    });
   };
 
   const registerUser = () => {
-
     const userData = {
       name: name,
       email: email,
@@ -43,26 +40,22 @@ function Signup() {
       rating: 0,
       role: userRole,
       username: username,
-      status: userStatus
-    }
+      status: userStatus,
+    };
 
     axios
       .post(createUser, userData)
       .then((res) => {
         alert("Sign Up success! Please wait until user is verified.");
-
-
       })
-      .catch((err) => {
-
-      });
+      .catch((err) => {});
     setName("");
     setUsername("");
     setEmail("");
     setPassword("");
     setPhone("");
     setuserLogin(true);
-  }
+  };
 
   //Render Login page if login button clicked else signup page
   if (userLogin) {
@@ -70,6 +63,7 @@ function Signup() {
   } else
     return (
       <div className="login">
+        <img className="logo" src={image} />
         <div className="signup--page">
           <form onSubmit={(e) => handleSignup(e)}>
             <h1>Sign Up Here</h1>
@@ -105,8 +99,6 @@ function Signup() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-
-
             </div>
             <input
               type="tel"
@@ -139,20 +131,16 @@ function Signup() {
               />
               <label htmlFor="washer">Washer</label>
             </div>
-            {userExists && <p className='warning'>User already exists!</p>}
-
+            {userExists && <p className="warning">User already exists!</p>}
 
             <button
               type="submit"
-              className="submit__btn"
+              className="login__btn"
               onClick={(e) => handleSignup(e)}
             >
               Sign Up
             </button>
-            <button
-              className="sign--up--btn"
-              onClick={() => setuserLogin(true)}
-            >
+            <button className="login__btn" onClick={() => setuserLogin(true)}>
               Already have an account?
             </button>
           </form>

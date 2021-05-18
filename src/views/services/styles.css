@@ -5,7 +5,6 @@
 }
 .service--items--container {
   width: 500px;
-  background-color: #242424;
   margin: 20px;
 
   border-radius: 10px;
@@ -16,32 +15,47 @@
   margin-left: 20px;
 }
 .car--section > select {
-  width: 400px;
+  width: 300px;
 }
+
 input {
   margin: 10px;
   height: 30px;
   font-size: 15px;
   color: #242424;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 15px;
+  border: 1px solid #242424;
 }
-select,
-button[name="submit"] {
+select {
   margin: 10px;
   width: 150px;
   height: 40px;
   font-size: 15px;
   color: #242424;
   border-radius: 5px;
+  border: 1px solid #242424;
+
 }
-.service--items--container > form > div > label {
-  color: aliceblue;
+.payment--section > button{
+  padding: 5px 20px 5px 20px;
+  background-color: transparent;
+  font-size: 18px;
+  border-radius: 10px;
+  border: 2px solid #242424;
+  cursor: pointer;
+  transition: all .2s ease-out;
+  margin: 15px;
 }
+.payment--section > button:hover{
+  background-color: #242424;
+  color: #fff;
+
+}
+
 .warning {
   text-align: center;
   font-size: 18px;
-  margin: 0 4rem 5px 0;
   font-weight: 500;
   font-family: BlinkMacSystemFont, 'Segoe UI';
 }

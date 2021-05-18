@@ -11,6 +11,7 @@ import Cars from "../../components/app-components/user-cars/index.js";
 import Footer from "../../components/app-components/footer/index.js";
 import Bookings from "../../components/app-components/bookings/index.js";
 import ManageUser from "../../components/app-components/manage-user/index.js";
+import LoggedInError from "../error/loggedIn.js";
 
 import axios from "axios";
 
@@ -20,6 +21,11 @@ function Profile() {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("user"));
   const orders = useSelector(selectOrders);
+  const [selectedButtonIndex, setselectedButtonIndex] = useState(0);
+
+  if (!user) {
+    return <LoggedInError />;
+  }
 
   //if order is null, only then order dispatched
   if (!orders && user.role === "ROLE_USER") {
@@ -36,12 +42,6 @@ function Profile() {
         dispatch(setOrders(res.data));
       })
       .catch((err) => alert(err));
-  }
-
-  const [selectedButtonIndex, setselectedButtonIndex] = useState(0);
-
-  if (!user) {
-    return "please Log In";
   }
 
   return (
