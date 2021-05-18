@@ -1,73 +1,79 @@
 .login {
 	display: flex;
-	flex-direction: column;
-
 	align-items: center;
+	justify-content: space-around;
+
 	}
 
-
-	.login--page{
-		margin-top: 20px;
-		height: 560px;
-		width: 500px;
-		background-color: #242424;
+.logo{
+	height: 400px;
+	width: 450px;
+}
+.welcome{
+	margin-left:10%;
+	height: 100px;
+}
+.login--page{
+		margin-top: 40px ;
+		height: 450px;
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
+		align-items: center;
+		width: 500px;
 		border-radius: 10px;
+		border: 1px solid #242424;
 	}
-	.login--page form{
-		margin-top: 100px;
+.login--page > form{
+		margin-top: 30px;
+
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 	}
-	.login--page form h1{
-		color: #fff;
-		margin: 10px;
+.login--page >  form >  h1{
 
+	margin-bottom: 30px;
+
+}
+.sign--up--btn{
+	margin-top: 10px;
+	height: 40px;
+	background-color: #242424;
+	color:#fff;
+	border: 1px solid #fff;
+	cursor: pointer;
+	border-radius: 5px;
+	padding :8px;
+}
+.warning{
+	color:red;
+	font-family: sans-serif;
+}
+.login__btn{
+	margin-top: 10px;
+	font-size: 18px;
+	padding: 10px 20px 10px 20px;
+	background-color: #242424;
+	border: none;
+	color:#fff;
+	cursor: pointer;
+	border-radius: 5px;
+}
+.login__btn:hover{
+	background-color: #fff;
+	border: 1px solid #242424;
+	color:#242424;
+	transition: all 0.3s ease-out;
+}
+ @media screen and (max-width:960px) {
+	.login--page{
+		width: 400px;
 	}
-	.sign--up--btn{
-		margin-top: 10px;
-		height: 40px;
-		background-color: #242424;
-		color:#fff;
-		border: 1px solid #fff;
-		cursor: pointer;
-		border-radius: 5px;
-		padding :8px;
+	.logo{
+		display: none;
 	}
-	.warning{
-		color:red;
-		font-family: sans-serif;
+	.welcome{
+		margin-left: 10px;
 	}
+ }
 
-	.submit__btn{
-		margin-top: 10px;
-		height: 40px;
-		width: 80px;
-		background-color: #242424;
-		color:#fff;
-		border: 1px solid #fff;
-		cursor: pointer;
-		border-radius: 5px;
-	}
-	.submit__btn:hover{
-		background-color: #fff;
-		color:#242424;
-		transition: all 0.3s ease-out;
-
-	}
-
-	 @media screen and (max-width:720px) {
-		.login--page{
-			width: 350px;
-		}
-
-	 }
-	 @media screen and (max-width:800px) {
-
-		.login--page{
-			width: 400px;
-		}
-
-	 }
