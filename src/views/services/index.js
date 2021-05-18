@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Footer from "../../components/app-components/footer/index.js";
+
 import "./styles.css";
 import { useSelector, useDispatch } from "react-redux";
 import { selectCars, setCars } from "../../redux/carSlice";
@@ -56,13 +57,9 @@ function Services() {
       orderAmount: amount,
     };
 
-    axios
-      .post(createOrder, orderData)
-      .then((response) => {
-        alert("Thank you! Your Booking is successfully created!");
-        history.push("/profile");
-      })
-      .catch((err) => alert(err));
+    localStorage.setItem("order", JSON.stringify(orderData));
+    debugger;
+    history.push("/checkout");
   };
 
   if (!cars) {
@@ -190,7 +187,7 @@ function Services() {
               </select>
               <br />
               <button className="custom--margin" type="submit" name="submit">
-                Book Wash
+                Review & Book Wash
               </button>
               <label className="custom--margin">
                 Amount:{" "}

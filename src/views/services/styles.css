@@ -37,7 +37,7 @@ select {
   border: 1px solid #242424;
 
 }
-.payment--section > button{
+button{
   padding: 5px 20px 5px 20px;
   background-color: transparent;
   font-size: 18px;
@@ -47,7 +47,7 @@ select {
   transition: all .2s ease-out;
   margin: 15px;
 }
-.payment--section > button:hover{
+button:hover{
   background-color: #242424;
   color: #fff;
 
