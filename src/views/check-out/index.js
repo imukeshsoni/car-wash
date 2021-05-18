@@ -9,10 +9,6 @@ export default function CheckOut() {
   const history = useHistory();
   const paypal = useRef();
 
-  if (!orderDetails || orderDetails.length < 1) {
-    return <h2>Please select an order first!</h2>;
-  }
-
   const pushOrder = (successMsg, errMsg) => {
     axios
       .post(createOrder, orderDetails)
@@ -70,6 +66,9 @@ export default function CheckOut() {
 
     pushOrder();
   };
+  if (!orderDetails || orderDetails.length < 1) {
+    return <h2>Please select an order first!</h2>;
+  }
 
   return (
     <div className="details--container">
