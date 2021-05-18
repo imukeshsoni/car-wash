@@ -50,8 +50,10 @@ const Cars = () => {
 
     axios
       .post(createVehicle, newCar)
-      .then((res) => loadCars())
+      .then((res) => {})
       .catch((err) => console.log(err));
+
+    loadCars();
 
     setcarName("");
     setcarBrand("");
@@ -63,16 +65,16 @@ const Cars = () => {
   const handleDeleteCar = (carId) => {
     axios
       .delete(deleteVehicleById + carId)
-      .then((res) => {
-        loadCars();
-      })
+      .then((res) => {})
       .catch((err) => console.log(err));
+
+    loadCars();
   };
 
   function addCarForm() {
     return (
       <div>
-        <form className="car--form" onSubmit={(e) => handleAddCar(e)}>
+        <form onSubmit={(e) => handleAddCar(e)}>
           <input
             type="text"
             value={carBrand}
