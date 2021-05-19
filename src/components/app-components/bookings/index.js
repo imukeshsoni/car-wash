@@ -1,4 +1,5 @@
 import React from "react";
+import "./styles.css";
 
 import { useSelector, useDispatch } from "react-redux";
 import { selectBookings, setBookings } from "../../../redux/bookingSlice";
@@ -16,7 +17,7 @@ function Bookings() {
   const user = JSON.parse(localStorage.getItem("user"));
 
   const loadBookings = () => {
-    if (!bookings && user.role === "ROLE_ADMIN") {
+    if (user.role === "ROLE_ADMIN") {
       axios
         .get(getAllOrders)
         .then((res) => {
@@ -24,7 +25,7 @@ function Bookings() {
         })
         .catch((err) => alert(err));
     }
-    if (!bookings && user.role === "ROLE_WASHER") {
+    if (user.role === "ROLE_WASHER") {
       axios
         .get(getAllPendingOrders)
         .then((res) => {
@@ -33,6 +34,10 @@ function Bookings() {
         .catch((err) => alert(err));
     }
   };
+
+  if (!bookings) {
+    loadBookings();
+  }
 
   const handleAssign = (inputId) => {
     const filterBooking = bookings.filter((t, i) => {
@@ -118,7 +123,10 @@ function Bookings() {
                 </td>
                 {value.washerEmail === "" && user.role === "ROLE_ADMIN" ? (
                   <td>
-                    <button className="" onClick={() => handleAssign(value.id)}>
+                    <button
+                      className="booking--btn"
+                      onClick={() => handleAssign(value.id)}
+                    >
                       Assign
                     </button>
                   </td>
@@ -126,7 +134,7 @@ function Bookings() {
                   value.washerEmail === "" && (
                     <td>
                       <button
-                        className=""
+                        className="booking--btn"
                         onClick={() => handleAssign(value.id)}
                       >
                         Take

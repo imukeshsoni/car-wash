@@ -186,7 +186,7 @@ function Services() {
                 <option value="online">Online</option>
               </select>
               <br />
-              <button className="custom--margin" type="submit" name="submit">
+              <button className="service--btn" type="submit" name="submit">
                 Review & Book Wash
               </button>
               <label className="custom--margin">

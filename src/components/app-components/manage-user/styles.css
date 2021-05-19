@@ -1,6 +1,7 @@
 .users--table{
-	width: 120%;
+	width: 100%;
 }
+
 @media screen and (max-width: 1160px) {
 	.users--table{
 		width: 100%;

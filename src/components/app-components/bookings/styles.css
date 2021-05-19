@@ -1,0 +1,14 @@
+.booking--btn{
+	height: 40px;
+	width: 80px;
+	color: #fff;
+	cursor: pointer;
+	background-color: transparent;
+	border: 1px solid #fff;
+	transition: all 0.3s ease-out;
+	margin-top: 3px;
+}
+.booking--btn:hover{
+	background-color: #fff;
+	color: #242424;
+}
