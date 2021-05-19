@@ -7,6 +7,7 @@ import {
   getAllOrders,
   getAllPendingOrders,
   updateOrderById,
+  getUserById,
 } from "../../../apis/urls";
 import axios from "axios";
 
@@ -63,20 +64,26 @@ function Bookings() {
       updatedBooking.washerEmail = user.email;
     } else {
       const washerEmailInput = document.getElementById(inputId).value;
-      updatedBooking.washerEmail = washerEmailInput;
-    }
-
-    axios
-      .put(updateOrderById + inputId, updatedBooking)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-        alert(err);
+      //check if washer is there or not
+      axios.get(getUserById + washerEmailInput).then((res) => {
+        debugger;
+        if (res.data.role != "ROLE_WASHER") {
+          alert("Washer " + washerEmailInput + " does not exists!");
+          return;
+        } else {
+          updatedBooking.washerEmail = washerEmailInput;
+          axios
+            .put(updateOrderById + inputId, updatedBooking)
+            .then((res) => {
+              loadBookings();
+            })
+            .catch((err) => {
+              console.log(err);
+              alert(err);
+            });
+        }
       });
-
-    loadBookings();
+    }
   };
 
   if (!bookings) {
