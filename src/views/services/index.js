@@ -19,7 +19,7 @@ function Services() {
   const [time, settime] = useState("");
   const [vehicleId, setvehicleId] = useState("");
   const [servicePlanName, setservicePlan] = useState("");
-  const [paymentMode, setpaymentMode] = useState("cash");
+  const [paymentMode, setpaymentMode] = useState("Cash");
   const [paymentStatus, setpaymentStatus] = useState("pending");
   const [amount, setamount] = useState(0);
 

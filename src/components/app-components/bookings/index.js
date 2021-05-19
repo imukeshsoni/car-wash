@@ -62,6 +62,15 @@ function Bookings() {
 
     if (user.role === "ROLE_WASHER") {
       updatedBooking.washerEmail = user.email;
+      axios
+        .put(updateOrderById + inputId, updatedBooking)
+        .then((res) => {
+          loadBookings();
+        })
+        .catch((err) => {
+          console.log(err);
+          alert(err);
+        });
     } else {
       const washerEmailInput = document.getElementById(inputId).value;
       //check if washer is there or not
@@ -128,7 +137,9 @@ function Bookings() {
                     value.washerEmail
                   )}
                 </td>
-                {value.washerEmail === "" && user.role === "ROLE_ADMIN" ? (
+                {value.washerEmail === "" &&
+                value.orderStatus == "pending" &&
+                user.role === "ROLE_ADMIN" ? (
                   <td>
                     <button
                       className="booking--btn"

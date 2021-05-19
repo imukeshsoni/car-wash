@@ -43,7 +43,6 @@ export default function CheckOut() {
         onApprove: async (data, actions) => {
           const order = await actions.order.capture();
           orderDetails.paymentStatus = "completed";
-          orderDetails.paymentStatus = "completed";
           pushOrder(
             "Your payment is successful and Booking is placed!",
             "Something went wrong while adding booking. Refund will be initiated if deducted."
