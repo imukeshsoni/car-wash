@@ -48,19 +48,19 @@ function ManageUser() {
 
     axios
       .put(updateUserById + email, updatedUser)
-      .then((res) => {})
+      .then((res) => {
+        loadUsers();
+      })
       .catch((err) => alert(err));
-
-    loadUsers();
   };
 
   const handleDelete = (email) => {
     axios
       .delete(deleteUserById + email)
-      .then((res) => {})
+      .then((res) => {
+        loadUsers();
+      })
       .catch((err) => alert("Error while deleting user"));
-
-    loadUsers();
   };
 
   if (!users) {

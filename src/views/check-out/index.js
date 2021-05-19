@@ -64,7 +64,10 @@ export default function CheckOut() {
     orderDetails.paymentMode = "Cash";
     orderDetails.paymentStatus = "pending";
 
-    pushOrder();
+    pushOrder(
+      "Your Booking is successfully placed!",
+      "Something went wrong while making your booking!"
+    );
   };
   if (!orderDetails || orderDetails.length < 1) {
     return <h2>Please select an order first!</h2>;
