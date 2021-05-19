@@ -1,0 +1,44 @@
+.details--container{
+
+	display: flex;
+	justify-content: space-evenly;
+}
+.inner--container{
+	display: flex;
+	justify-content: space-evenly;
+	width: 75%;
+	padding: 10px;
+	border: 3px solid #242424;
+	border-radius: 10px;
+}
+
+.order--details{
+	font-size: 18px;
+	border: 2px solid #242424;
+	border-radius: 10px;
+	margin-left: 1%;
+}
+th{
+	font-size: 24px;
+	padding: 10px;
+	border-bottom: 2px dashed #242424;
+}
+td{
+	padding: 10px;
+}
+
+.paypal{
+	width: 25%;
+}
+#cash--btn{
+	margin: 20px 10px 20px 0;
+	width: 100%;
+}
+@media screen and (max-width: 560px) {
+	.paypal{
+		width: 50%;
+	}
+	.inner--container{
+		width: 100%;
+	}
+}

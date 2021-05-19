@@ -17,14 +17,14 @@ function Order() {
   const user = JSON.parse(localStorage.getItem("user"));
 
   const loadOrders = () => {
-    if (!orders && user.role === "ROLE_WASHER") {
+    if (user.role === "ROLE_WASHER") {
       axios
         .get(getWasherOrdersById + user.email)
         .then((res) => {
           dispatch(setOrders(res.data));
         })
         .catch((err) => alert(err));
-    } else if (!orders && user.role === "ROLE_USER") {
+    } else if (user.role === "ROLE_USER") {
       axios
         .get(getCustomerOrdersById + user.email)
         .then((res) => {
@@ -33,10 +33,11 @@ function Order() {
         .catch((err) => alert(err));
     }
   };
-  loadOrders();
+  if (!orders) {
+    loadOrders();
+  }
 
   const handleCancel = (i) => {
-    debugger;
     let filterOrder = orders.filter((value, index) => {
       return value.id === i;
     });

@@ -3,6 +3,8 @@ import "./styles.css";
 import axios from "axios";
 import Signup from "../sign-up/index.js";
 import { sha512 } from "js-sha512";
+import logo from "../../assets/images/car-wash-logo-2.png";
+import welcome from "../../assets/images/welcome.png";
 
 import { login } from "../../redux/userSlice";
 import { useDispatch } from "react-redux";
@@ -48,8 +50,8 @@ const Login = () => {
       .get(getUserById + email)
       .then((res) => {
         if (res.data.password === sha512(password)) {
-          res.data.status ?
-            setUser(res)
+          res.data.status
+            ? setUser(res)
             : setuserWarning("User is not acitve yet.");
         } else {
           setuserWarning("Invalid credentials");
@@ -65,32 +67,35 @@ const Login = () => {
   } else
     return (
       <div className="login">
+        <img className="logo" src={logo} />
+
         <div className="login--page">
+          <img className="welcome" src={welcome} />
           <form onSubmit={(e) => handleSubmit(e)}>
-            <h1>Log In</h1>
+            <h1>Login here</h1>
+            <h4>Email</h4>
             <input
               type="email"
               value={email}
-              placeholder="Email"
+              placeholder="joe@example.com"
               onChange={(e) => setEmail(e.target.value)}
               required
             />
+            <h4>Password</h4>
             <input
               type="password"
               value={password}
-              placeholder="Password"
+              placeholder="shhhh! It's secret."
               autoComplete="current-password"
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            {userWarning && (
-              <p className="warning">{userWarning}</p>
-            )}
+            {userWarning && <p className="warning">{userWarning}</p>}
 
-            <button type="submit" className="submit__btn">
+            <button type="submit" className="login__btn">
               Login
             </button>
-            <button className="submit__btn" onClick={() => setuserSignUp(true)}>
+            <button className="login__btn" onClick={() => setuserSignUp(true)}>
               Sign Up?
             </button>
           </form>

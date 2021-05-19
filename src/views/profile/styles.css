@@ -1,15 +1,15 @@
 .side--nav{
-	width: 180px;
+	width: 250px;
 	justify-content: space-evenly;
 	padding: 5px 10px 0 5px;
 	margin-right: 15px;
-
 }
 .container{
 	display: flex;
 	background-color: #242424;
+}
+.selected--menu{
 	overflow-x: auto;
-
 }
 .menu--button{
 	width: 100%;

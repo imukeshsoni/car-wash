@@ -1,5 +1,6 @@
 .orders--container{
 	margin: 0;
+	overflow-x: auto;
 
 }
 .order--table--heading > th{
@@ -20,6 +21,7 @@
 
 }
 .cancel--btn{
+	padding: 0;
 	height: 40px;
 	width: 80px;
 	color: #fff;
