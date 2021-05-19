@@ -4,6 +4,7 @@
 	justify-content: space-evenly;
 }
 .inner--container{
+	margin-top: 20px;
 	display: flex;
 	justify-content: space-evenly;
 	width: 75%;
