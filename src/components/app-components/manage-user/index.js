@@ -48,19 +48,19 @@ function ManageUser() {
 
     axios
       .put(updateUserById + email, updatedUser)
-      .then((res) => {})
+      .then((res) => {
+        loadUsers();
+      })
       .catch((err) => alert(err));
-
-    loadUsers();
   };
 
   const handleDelete = (email) => {
     axios
       .delete(deleteUserById + email)
-      .then((res) => {})
+      .then((res) => {
+        loadUsers();
+      })
       .catch((err) => alert("Error while deleting user"));
-
-    loadUsers();
   };
 
   if (!users) {
@@ -90,6 +90,7 @@ function ManageUser() {
                 <td>
                   {value.status ? (
                     <button
+                      className="manage--btns"
                       onClick={(e) => {
                         handleStatus(value.email, false);
                       }}
@@ -98,6 +99,7 @@ function ManageUser() {
                     </button>
                   ) : (
                     <button
+                      className="manage--btns"
                       onClick={(e) => {
                         handleStatus(value.email, true);
                       }}
@@ -108,6 +110,7 @@ function ManageUser() {
                 </td>
                 <td>
                   <button
+                    className="manage--btns"
                     onClick={(e) => {
                       handleDelete(value.email);
                     }}

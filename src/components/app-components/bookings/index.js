@@ -1,4 +1,5 @@
 import React from "react";
+import "./styles.css";
 
 import { useSelector, useDispatch } from "react-redux";
 import { selectBookings, setBookings } from "../../../redux/bookingSlice";
@@ -6,6 +7,7 @@ import {
   getAllOrders,
   getAllPendingOrders,
   updateOrderById,
+  getUserById,
 } from "../../../apis/urls";
 import axios from "axios";
 
@@ -16,7 +18,7 @@ function Bookings() {
   const user = JSON.parse(localStorage.getItem("user"));
 
   const loadBookings = () => {
-    if (!bookings && user.role === "ROLE_ADMIN") {
+    if (user.role === "ROLE_ADMIN") {
       axios
         .get(getAllOrders)
         .then((res) => {
@@ -24,7 +26,7 @@ function Bookings() {
         })
         .catch((err) => alert(err));
     }
-    if (!bookings && user.role === "ROLE_WASHER") {
+    if (user.role === "ROLE_WASHER") {
       axios
         .get(getAllPendingOrders)
         .then((res) => {
@@ -33,6 +35,10 @@ function Bookings() {
         .catch((err) => alert(err));
     }
   };
+
+  if (!bookings) {
+    loadBookings();
+  }
 
   const handleAssign = (inputId) => {
     const filterBooking = bookings.filter((t, i) => {
@@ -56,22 +62,37 @@ function Bookings() {
 
     if (user.role === "ROLE_WASHER") {
       updatedBooking.washerEmail = user.email;
+      axios
+        .put(updateOrderById + inputId, updatedBooking)
+        .then((res) => {
+          loadBookings();
+        })
+        .catch((err) => {
+          console.log(err);
+          alert(err);
+        });
     } else {
       const washerEmailInput = document.getElementById(inputId).value;
-      updatedBooking.washerEmail = washerEmailInput;
-    }
-
-    axios
-      .put(updateOrderById + inputId, updatedBooking)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-        alert(err);
+      //check if washer is there or not
+      axios.get(getUserById + washerEmailInput).then((res) => {
+        debugger;
+        if (res.data.role != "ROLE_WASHER") {
+          alert("Washer " + washerEmailInput + " does not exists!");
+          return;
+        } else {
+          updatedBooking.washerEmail = washerEmailInput;
+          axios
+            .put(updateOrderById + inputId, updatedBooking)
+            .then((res) => {
+              loadBookings();
+            })
+            .catch((err) => {
+              console.log(err);
+              alert(err);
+            });
+        }
       });
-
-    loadBookings();
+    }
   };
 
   if (!bookings) {
@@ -116,9 +137,14 @@ function Bookings() {
                     value.washerEmail
                   )}
                 </td>
-                {value.washerEmail === "" && user.role === "ROLE_ADMIN" ? (
+                {value.washerEmail === "" &&
+                value.orderStatus == "pending" &&
+                user.role === "ROLE_ADMIN" ? (
                   <td>
-                    <button className="" onClick={() => handleAssign(value.id)}>
+                    <button
+                      className="booking--btn"
+                      onClick={() => handleAssign(value.id)}
+                    >
                       Assign
                     </button>
                   </td>
@@ -126,7 +152,7 @@ function Bookings() {
                   value.washerEmail === "" && (
                     <td>
                       <button
-                        className=""
+                        className="booking--btn"
                         onClick={() => handleAssign(value.id)}
                       >
                         Take

@@ -43,7 +43,6 @@ export default function CheckOut() {
         onApprove: async (data, actions) => {
           const order = await actions.order.capture();
           orderDetails.paymentStatus = "completed";
-          orderDetails.paymentStatus = "completed";
           pushOrder(
             "Your payment is successful and Booking is placed!",
             "Something went wrong while adding booking. Refund will be initiated if deducted."
@@ -64,7 +63,10 @@ export default function CheckOut() {
     orderDetails.paymentMode = "Cash";
     orderDetails.paymentStatus = "pending";
 
-    pushOrder();
+    pushOrder(
+      "Your Booking is successfully placed!",
+      "Something went wrong while making your booking!"
+    );
   };
   if (!orderDetails || orderDetails.length < 1) {
     return <h2>Please select an order first!</h2>;
