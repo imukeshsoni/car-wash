@@ -15,6 +15,8 @@ function Order() {
   const orders = useSelector(selectOrders);
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("user"));
+  const [cancel, setCancel] = useState("");
+  const [complete, setComplete] = useState("");
 
   const loadOrders = () => {
     if (user.role === "ROLE_WASHER") {
@@ -23,14 +25,14 @@ function Order() {
         .then((res) => {
           dispatch(setOrders(res.data));
         })
-        .catch((err) => alert(err));
+        .catch((err) => console.log(err));
     } else if (user.role === "ROLE_USER") {
       axios
         .get(getCustomerOrdersById + user.email)
         .then((res) => {
           dispatch(setOrders(res.data));
         })
-        .catch((err) => alert(err));
+        .catch((err) => console.log(err));
     }
   };
   if (!orders) {
@@ -119,23 +121,35 @@ function Order() {
                 <td>{value.washerEmail}</td>
                 {user.role === "ROLE_USER" && value.orderStatus === "pending" && (
                   <td>
-                    <button
-                      className="cancel--btn"
-                      onClick={() => handleCancel(value.id)}
-                    >
-                      Cancel
-                    </button>
+                    {cancel === value.id ? (
+                      <button
+                        className="cancel--btn"
+                        onClick={() => handleCancel(value.id)}
+                      >
+                        Sure Cancel?
+                      </button>
+                    ) : (
+                      <button onClick={() => setCancel(value.id)}>
+                        Cancel
+                      </button>
+                    )}
                   </td>
                 )}
                 {user.role === "ROLE_WASHER" &&
                   value.orderStatus === "pending" && (
                     <td>
-                      <button
-                        className="cancel--btn"
-                        onClick={() => handleComplete(value.id)}
-                      >
-                        Complete
-                      </button>
+                      {complete == value.id ? (
+                        <button
+                          className="cancel--btn"
+                          onClick={() => handleComplete(value.id)}
+                        >
+                          Sure Complete
+                        </button>
+                      ) : (
+                        <button onClick={() => setComplete(value.id)}>
+                          Complete
+                        </button>
+                      )}
                     </td>
                   )}
               </tr>
