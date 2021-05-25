@@ -33,7 +33,7 @@ function Bookings() {
         .then((res) => {
           dispatch(setBookings(res.data));
         })
-        .catch((err) => alert(err));
+        .catch((err) => console.log(err));
     }
     if (user.role === "ROLE_WASHER") {
       axios
@@ -41,7 +41,7 @@ function Bookings() {
         .then((res) => {
           dispatch(setBookings(res.data));
         })
-        .catch((err) => alert(err));
+        .catch((err) => console.log(err));
     }
   };
 
@@ -78,7 +78,6 @@ function Bookings() {
         })
         .catch((err) => {
           console.log(err);
-          alert(err);
         });
     } else {
       const washerEmailInput = document.getElementById(inputId).value;
@@ -94,7 +93,6 @@ function Bookings() {
         })
         .catch((err) => {
           console.log(err);
-          alert(err);
         });
     }
   };
