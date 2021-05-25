@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Button } from "../../components/base-components/button/index.js";
 import "./styles.css";
 import { selectUser, logout } from "../../redux/userSlice";
@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   let user = useSelector(selectUser);
   const persistUser = JSON.parse(localStorage.getItem("user"));
 
@@ -24,6 +25,7 @@ const Navbar = () => {
     dispatch(clearOrders());
     dispatch(clearCars());
     dispatch(clearBookings());
+    history.push("/");
   };
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
