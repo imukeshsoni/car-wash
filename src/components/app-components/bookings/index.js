@@ -8,6 +8,7 @@ import {
   getAllPendingOrders,
   updateOrderById,
   getUserById,
+  getAllWashers,
 } from "../../../apis/urls";
 import axios from "axios";
 
@@ -16,6 +17,14 @@ function Bookings() {
   const dispatch = useDispatch();
 
   const user = JSON.parse(localStorage.getItem("user"));
+
+  const allWashers = JSON.parse(localStorage.getItem("allWashers"));
+
+  if (!allWashers) {
+    axios.get(getAllWashers).then((res) => {
+      localStorage.setItem("allWashers", JSON.stringify(res.data));
+    });
+  }
 
   const loadBookings = () => {
     if (user.role === "ROLE_ADMIN") {
@@ -74,24 +83,19 @@ function Bookings() {
     } else {
       const washerEmailInput = document.getElementById(inputId).value;
       //check if washer is there or not
-      axios.get(getUserById + washerEmailInput).then((res) => {
-        debugger;
-        if (res.data.role != "ROLE_WASHER") {
-          alert("Washer " + washerEmailInput + " does not exists!");
-          return;
-        } else {
-          updatedBooking.washerEmail = washerEmailInput;
-          axios
-            .put(updateOrderById + inputId, updatedBooking)
-            .then((res) => {
-              loadBookings();
-            })
-            .catch((err) => {
-              console.log(err);
-              alert(err);
-            });
-        }
-      });
+
+      if (washerEmailInput == "") return;
+
+      updatedBooking.washerEmail = washerEmailInput;
+      axios
+        .put(updateOrderById + inputId, updatedBooking)
+        .then((res) => {
+          loadBookings();
+        })
+        .catch((err) => {
+          console.log(err);
+          alert(err);
+        });
     }
   };
 
@@ -132,7 +136,14 @@ function Bookings() {
                 <td>{value.orderAmount}</td>
                 <td>
                   {!value.washerEmail && user.role === "ROLE_ADMIN" ? (
-                    <input type="email" id={value.id} />
+                    <select id={value.id}>
+                      <option value="">Please select a washer</option>
+                      {allWashers.map((value2, i) => {
+                        return (
+                          <option value={value2.email}>{value2.email}</option>
+                        );
+                      })}
+                    </select>
                   ) : (
                     value.washerEmail
                   )}
