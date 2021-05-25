@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./styles.css";
 
@@ -14,7 +14,7 @@ import {
 function ManageUser() {
   const users = useSelector(selectUsers);
   const dispatch = useDispatch();
-
+  const [deleteUser, setDeleteUser] = useState("");
   const loadUsers = () => {
     axios
       .get(getAllUsers)
@@ -51,7 +51,7 @@ function ManageUser() {
       .then((res) => {
         loadUsers();
       })
-      .catch((err) => alert(err));
+      .catch((err) => console.log(err));
   };
 
   const handleDelete = (email) => {
@@ -60,7 +60,7 @@ function ManageUser() {
       .then((res) => {
         loadUsers();
       })
-      .catch((err) => alert("Error while deleting user"));
+      .catch((err) => console.log(err));
   };
 
   if (!users) {
@@ -109,14 +109,20 @@ function ManageUser() {
                   )}
                 </td>
                 <td>
-                  <button
-                    className="manage--btns"
-                    onClick={(e) => {
-                      handleDelete(value.email);
-                    }}
-                  >
-                    Delete
-                  </button>
+                  {deleteUser == value.email ? (
+                    <button
+                      className="manage--btns"
+                      onClick={(e) => {
+                        handleDelete(value.email);
+                      }}
+                    >
+                      Sure Delete?
+                    </button>
+                  ) : (
+                    <button onClick={() => setDeleteUser(value.email)}>
+                      Delete
+                    </button>
+                  )}
                 </td>
               </tr>
             );

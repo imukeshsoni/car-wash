@@ -3,6 +3,8 @@ const getWasherOrdersById = "http://localhost:8082/order/getbywasher/";
 const getUserById = "http://localhost:8081/user/get/";
 const createUser = "http://localhost:8081/user/create";
 const getAllUsers = "http://localhost:8081/user/getall";
+const getAllWashers = "http://localhost:8081/user/get/washers";
+
 const deleteUserById = "http://localhost:8081/user/delete/";
 const updateUserById = "http://localhost:8081/user/update/";
 const createOrder = "http://localhost:8082/order/create";
@@ -30,6 +32,7 @@ export {
   getUserById,
   createUser,
   getAllUsers,
+  getAllWashers,
   deleteUserById,
   getOrderById,
   getCustomerOrdersById,

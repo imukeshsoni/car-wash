@@ -16,6 +16,7 @@ const Cars = () => {
   const [carYear, setcarYear] = useState("");
   const [carNumber, setcarNumber] = useState("");
   const [carType, setcarType] = useState("");
+  const [deleteCar, setDeleteCar] = useState("");
 
   const dispatch = useDispatch();
 
@@ -147,9 +148,17 @@ const Cars = () => {
 
                 <td>{value.vehicleNumber}</td>
                 <td>
-                  <button onClick={() => handleDeleteCar(value.vehicleNumber)}>
-                    Delete
-                  </button>
+                  {deleteCar == value.vehicleNumber ? (
+                    <button
+                      onClick={() => handleDeleteCar(value.vehicleNumber)}
+                    >
+                      Sure Delete?
+                    </button>
+                  ) : (
+                    <button onClick={() => setDeleteCar(value.vehicleNumber)}>
+                      Delete
+                    </button>
+                  )}
                 </td>
               </tr>
             );
