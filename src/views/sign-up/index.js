@@ -17,14 +17,14 @@ function Signup() {
   const [userRole, setuserRole] = useState("ROLE_USER");
   const [userStatus, setuserStatus] = useState(false);
   const [userLogin, setuserLogin] = useState(false);
-  const [userExists, setuserExists] = useState(false);
+  const [userWarning, setUserWarning] = useState("");
 
   const handleSignup = (e) => {
     e.preventDefault();
     axios.get(getUserById + email).then((res) => {
       debugger;
       if (res.data !== "") {
-        setuserExists(true);
+        setUserWarning("User already exists!");
       } else {
         registerUser();
       }
@@ -46,7 +46,7 @@ function Signup() {
     axios
       .post(createUser, userData)
       .then((res) => {
-        alert("Sign Up success! Please wait until user is verified.");
+        setUserWarning("Sign Up success! Please wait until user is verified.");
       })
       .catch((err) => {});
     setName("");
@@ -131,7 +131,7 @@ function Signup() {
               />
               <label htmlFor="washer">Washer</label>
             </div>
-            {userExists && <p className="warning">User already exists!</p>}
+            {userWarning && <p className="warning">{userWarning}</p>}
 
             <button
               type="submit"

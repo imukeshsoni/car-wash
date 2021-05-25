@@ -34,14 +34,14 @@ function Profile() {
       .then((res) => {
         dispatch(setOrders(res.data));
       })
-      .catch((err) => alert(err));
+      .catch((err) => console.log(err));
   } else if (!orders && user.ROLE === "ROLE_WASHER") {
     axios
       .get(getWasherOrdersById + user.email)
       .then((res) => {
         dispatch(setOrders(res.data));
       })
-      .catch((err) => alert(err));
+      .catch((err) => console.log(err));
   }
 
   return (

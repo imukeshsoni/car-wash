@@ -20,7 +20,7 @@
 	padding: 5px;
 
 }
-.cancel--btn{
+table>tbody>tr>td>button{
 	padding: 0;
 	height: 40px;
 	width: 80px;
@@ -30,7 +30,7 @@
 	border: 1px solid #fff;
 	transition: all 0.3s ease-out;
 }
-.cancel--btn:hover{
+table>tbody>tr>td>button:hover{
 	background-color: #fff;
 	color: #242424;
 }

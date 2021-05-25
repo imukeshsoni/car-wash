@@ -13,11 +13,11 @@ export default function CheckOut() {
     axios
       .post(createOrder, orderDetails)
       .then((response) => {
-        alert(successMsg);
+        <h2>{successMsg}</h2>;
         history.push("/profile");
       })
       .catch((err) => {
-        alert(errMsg);
+        <h2>{errMsg}</h2>;
         history.push("/services");
       });
 
@@ -34,7 +34,7 @@ export default function CheckOut() {
               {
                 description: orderDetails.servicePlan,
                 amount: {
-                  value: 1.0,
+                  value: orderDetails.orderAmount,
                 },
               },
             ],
