@@ -1,70 +1,27 @@
-# Getting Started with Create React App
+# Washivo - an On demand Car wash service
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## The UI is created using JavaScript library React.
 
-## Available Scripts
+### UI identifies 3 user Roles:
+  1. User - Can book car wash, Add his cars, Make payments using online gateway
+  2. Washer - Can take wash request and complete the job which are pending.
+  3. Admin - Has control over the user activation/deactivation and deletion, assign jobs which are pending to washer.
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<img src="/src/assets/images/Screenshots/1.jpg"/>
+<img src="/src/assets/images/Screenshots/2.jpg"/>
+<img src="/src/assets/images/Screenshots/3.jpg"/>
+<img src="/src/assets/images/Screenshots/4.jpg"/>
+<img src="/src/assets/images/Screenshots/5.jpg"/>
+<img src="/src/assets/images/Screenshots/6.jpg"/>
+<img src="/src/assets/images/Screenshots/7.jpg"/>
+<img src="/src/assets/images/Screenshots/8.jpg"/>
+<img src="/src/assets/images/Screenshots/9.jpg"/>
+<img src="/src/assets/images/Screenshots/10.jpg"/>
+<img src="/src/assets/images/Screenshots/11.jpg"/>
+<img src="/src/assets/images/Screenshots/12.jpg"/>
+<img src="/src/assets/images/Screenshots/13.jpg"/>
+<img src="/src/assets/images/Screenshots/14.jpg"/>
+<img src="/src/assets/images/Screenshots/15.jpg"/>
+<img src="/src/assets/images/Screenshots/16.jpg"/>
+<img src="/src/assets/images/Screenshots/17.jpg"/>
+<img src="/src/assets/images/Screenshots/18.jpg"/>
