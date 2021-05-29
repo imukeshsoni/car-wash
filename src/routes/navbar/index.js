@@ -4,7 +4,6 @@ import { Button } from "../../components/base-components/button/index.js";
 import "./styles.css";
 import { selectUser, logout } from "../../redux/userSlice";
 import { clearUsers } from "../../redux/usersSlice";
-import { clearPlans } from "../../redux/planSlice";
 import { clearOrders } from "../../redux/orderSlice";
 import { clearCars } from "../../redux/carSlice";
 import { clearBookings } from "../../redux/bookingSlice";
@@ -21,7 +20,6 @@ const Navbar = () => {
     localStorage.clear();
     dispatch(logout());
     dispatch(clearUsers());
-    dispatch(clearPlans());
     dispatch(clearOrders());
     dispatch(clearCars());
     dispatch(clearBookings());
