@@ -7,6 +7,7 @@ import services from "../services/index.js";
 import SignUp from "../sign-up/index.js";
 import Profile from "../profile/index.js";
 import CheckOut from "../check-out/index.js";
+import Confirmation from "../confirmation/index.js";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/sign-up" exact component={SignUp} />
           <Route path="/profile" exact component={Profile} />
           <Route path="/checkout" exact component={CheckOut} />
+          <Route path="/confirmation" exact component={Confirmation} />
         </Switch>
       </Router>
     </>

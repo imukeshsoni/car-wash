@@ -1,0 +1,63 @@
+.confirmation--container{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+}
+.confirmation--logo{
+
+	height: 7rem;
+}
+.booking--details--table{
+	margin-top: 1%;
+	width: 90%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.booking--details--table > table{
+	width: 50%;
+}
+
+.booking--details--table > button {
+	height: 30px;
+	font-size: 16px;
+	margin-top: 10px;
+	padding-left: 1%;
+	padding-right: 1%;
+	border: 1px solid #242424;
+	border-radius: 10px;
+	background-color: transparent;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+}
+.booking--details--table > button:hover{
+	background-color: #242424;
+	color: #fff;
+}
+
+
+.confirmation--logo > i{
+	font-size: 6rem;
+	margin: 10px;
+	animation: all 3s ease-in-out;
+
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.confirmation--logo > i{
+		animation-name: example;
+		animation-duration: infinite;
+		animation-iteration-count: infinite;
+
+	}
+}
+
+@keyframes example {
+	0%   {font-size: 6rem;}
+
+	50%  {font-size: 7rem;}
+
+	100% {font-size: 6rem; color: green;}
+ }
