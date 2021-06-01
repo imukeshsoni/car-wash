@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./styles.css";
 import { useSelector, useDispatch } from "react-redux";
-import { selectCars, setCars } from "../../../redux/carSlice";
+import { selectCars, setCars, clearCars } from "../../../redux/carSlice";
 import axios from "axios";
 import {
   createVehicle,
@@ -51,10 +51,10 @@ const Cars = () => {
 
     axios
       .post(createVehicle, newCar)
-      .then((res) => {})
+      .then((res) => {
+        dispatch(clearCars());
+      })
       .catch((err) => console.log(err));
-
-    loadCars();
 
     setcarName("");
     setcarBrand("");

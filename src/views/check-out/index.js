@@ -14,14 +14,12 @@ export default function CheckOut() {
       .post(createOrder, orderDetails)
       .then((response) => {
         <h2>{successMsg}</h2>;
-        history.push("/profile");
+        history.push("/confirmation");
       })
       .catch((err) => {
         <h2>{errMsg}</h2>;
         history.push("/services");
       });
-
-    localStorage.removeItem("order");
   };
 
   useEffect(() => {
