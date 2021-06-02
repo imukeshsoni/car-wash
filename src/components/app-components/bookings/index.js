@@ -3,6 +3,8 @@ import "./styles.css";
 
 import { useSelector, useDispatch } from "react-redux";
 import { selectBookings, setBookings } from "../../../redux/bookingSlice";
+import { clearOrders } from "../../../redux/orderSlice";
+
 import {
   getAllOrders,
   getAllPendingOrders,
@@ -75,6 +77,7 @@ function Bookings() {
         .put(updateOrderById + inputId, updatedBooking)
         .then((res) => {
           loadBookings();
+          dispatch(clearOrders());
         })
         .catch((err) => {
           console.log(err);

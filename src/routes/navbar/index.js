@@ -18,12 +18,8 @@ const Navbar = () => {
 
   const logOut = () => {
     localStorage.clear();
-    dispatch(logout());
-    dispatch(clearUsers());
-    dispatch(clearOrders());
-    dispatch(clearCars());
-    dispatch(clearBookings());
     history.push("/");
+    window.location.reload();
   };
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
