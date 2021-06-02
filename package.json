@@ -8,6 +8,8 @@
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
+    "ag-grid-community": "^25.3.0",
+    "ag-grid-react": "^25.3.0",
     "antd": "^4.15.4",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
@@ -47,5 +49,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "redux-mock-store": "^1.5.4"
   }
 }
