@@ -67,10 +67,10 @@ const Login = () => {
   } else
     return (
       <div className="login">
-        <img className="logo" src={logo} />
+        <img className="logo" src={logo} alt="logo" />
 
         <div className="login--page">
-          <img className="welcome" src={welcome} />
+          <img className="welcome" src={welcome} alt="welcome" />
           <form onSubmit={(e) => handleSubmit(e)}>
             <h1>Login here</h1>
             <h4>Email</h4>

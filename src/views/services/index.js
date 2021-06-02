@@ -5,7 +5,7 @@ import "./styles.css";
 import { useSelector, useDispatch } from "react-redux";
 import { selectCars, setCars } from "../../redux/carSlice";
 import axios from "axios";
-import { createOrder, getVehicleByCustomerId } from "../../apis/urls";
+import { getVehicleByCustomerId } from "../../apis/urls";
 import { useHistory } from "react-router";
 import LoggedInError from "../error/loggedIn.js";
 

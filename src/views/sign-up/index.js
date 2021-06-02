@@ -15,7 +15,6 @@ function Signup() {
   const [username, setUsername] = useState("");
   const [phone, setPhone] = useState("");
   const [userRole, setuserRole] = useState("ROLE_USER");
-  const [userStatus, setuserStatus] = useState(false);
   const [userLogin, setuserLogin] = useState(false);
   const [userWarning, setUserWarning] = useState("");
 
@@ -40,7 +39,7 @@ function Signup() {
       rating: 0,
       role: userRole,
       username: username,
-      status: userStatus,
+      status: false,
     };
 
     axios
@@ -63,7 +62,7 @@ function Signup() {
   } else
     return (
       <div className="login">
-        <img className="logo" src={image} />
+        <img className="logo" src={image} alt="logo" />
         <div className="signup--page">
           <form onSubmit={(e) => handleSignup(e)}>
             <h1>Sign Up Here</h1>

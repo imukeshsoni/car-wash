@@ -5,7 +5,7 @@ import image from "../../assets/images/error-image.png";
 function LoggedInError(props) {
   return (
     <div className="error--container">
-      <img src={image} className="error--image" />
+      <img src={image} className="error--image" alt="error" />
       <br />
       <p className="error--text">You are not logged in! Please log In.</p>
     </div>

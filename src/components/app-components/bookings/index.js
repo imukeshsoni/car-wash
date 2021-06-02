@@ -9,7 +9,6 @@ import {
   getAllOrders,
   getAllPendingOrders,
   updateOrderById,
-  getUserById,
   getAllWashers,
 } from "../../../apis/urls";
 import axios from "axios";

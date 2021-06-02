@@ -2,16 +2,11 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Button } from "../../components/base-components/button/index.js";
 import "./styles.css";
-import { selectUser, logout } from "../../redux/userSlice";
-import { clearUsers } from "../../redux/usersSlice";
-import { clearOrders } from "../../redux/orderSlice";
-import { clearCars } from "../../redux/carSlice";
-import { clearBookings } from "../../redux/bookingSlice";
+import { selectUser } from "../../redux/userSlice";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const dispatch = useDispatch();
   const history = useHistory();
   let user = useSelector(selectUser);
   const persistUser = JSON.parse(localStorage.getItem("user"));
