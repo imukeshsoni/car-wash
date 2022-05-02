@@ -7,6 +7,8 @@
   2. Washer - Can take wash request and complete the job which are pending.
   3. Admin - Has control over the user activation/deactivation and deletion, assign jobs which are pending to washer.
 
+## Demo video - <a href="https://drive.google.com/file/d/1fJgVDZWnWtf0oB9Cu06ZdnNh1xbjYG10/view?usp=sharing" target="_blank"> Click here </a>
+
 <img src="/src/assets/images/Screenshots/1.jpg"/>
 <img src="/src/assets/images/Screenshots/2.jpg"/>
 <img src="/src/assets/images/Screenshots/3.jpg"/>
